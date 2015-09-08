@@ -1,5 +1,69 @@
 #!/usr/bin/perl -w
 
+=pod
+This source code is part of smallmol pipeline for estimate of dG 
+upon small modification of a protein molecule
+Written by Ivana Mihalek. opyright (C) 2011-2015 Ivana Mihalek.
+
+Gromacs @CCopyright 2015, GROMACS development team. 
+Acpype  @CCopyright 2015 SOUSA DA SILVA, A. W. & VRANKEN, W. F.
+Gamess  @Copyright 2015m ISUQCG and and contributors to the GAMESS package
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version. This program is distributed in 
+the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+PURPOSE. See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program. If not, see<http://www.gnu.org/licenses/>.
+Contact: ivana.mihalek@gmail.com.
+=cut
+
+
+
+
+sub q_run (@);
+$max_jobs = 7;
+
+###########################################
+###########################################
+###########################################
+#
+#  check for all dependencises 
+#
+###########################################
+
+# the number of steps for each type of run
+# no protein
+$no_steps[0]{"em_steep"}  = 10000;
+$no_steps[0]{"em_lbfgs"}  =  5000;
+$no_steps[0]{"pr_nvt"}    = int (200.0/2e-3); # 200ps
+$no_steps[0]{"pr_npt"}    = int (200.0/2e-3); # 200ps 
+$no_steps[0]{"md"}        = int ( 10.0/2e-6); # 10ns
+
+# with protein
+$no_steps[1]{"em_steep"}  = 10000;
+$no_steps[1]{"em_lbfgs"}  = 5000;
+$no_steps[1]{"pr_nvt"}    = int (100.0/2e-3); # 100ps
+$no_steps[1]{"pr_npt"}    = int (100.0/2e-3); # 100ps
+$no_steps[1]{"md"}        = int (  3.0/2e-6); # 3ns;
+
+
+# lambdas are hardcoded for now:
+($l_start, $l_step_size, $no_of_steps) = (0.0, 0.1, 11);
+
+
+
+$gmx = "/home/ivanam/perlscr/gromacs/gromacs.pl";
+( -e "$gmx" ) || die "Main ingredient missing: $gmx.\n";
+
+( -e "gmx_input" ) || die "Main ingredient missing: gmx_input directory.\n";
+
+foreach ( "itps", "gros", "mdps") {
+
+
 
 sub q_run (@);
 $max_jobs = 7;
