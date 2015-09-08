@@ -1,0 +1,22 @@
+#!/bin/bash
+#BSUB -q compbio
+#BSUB -J apom_del12  # Name of the job
+#BSUB -o apom_del12
+#BSUB -e apom_del12
+#BSUB -n 4
+
+workdir=$PWD
+hostfile=hosts.$LSB_JOBID
+mangle=$LSB_JOBID
+
+
+echo "$LSB_JOBID started on `hostname` at `date`"
+echo "$LSB_JOBID started in queue $LSB_QUEUE"
+echo
+
+echo $LSB_HOSTS > $hostfile
+
+cd $workdir
+/home/biiivana/perlscr/gromacs_pll.pl $hostfile $mangle 2wewA_del12
+rm -f $hostfile
+echo "$LSB_JOBID done on `hostname` at `date`"

@@ -1,0 +1,23 @@
+define              =  -DFLEXIBLE 
+constraints         =  none 
+integrator          =  steep 
+dt                  =  0.002    ; ps ! 
+nsteps              =  15000 
+nstlist             =  5  
+ns_type             =  grid 
+rlist               =  0.9 
+coulombtype         =  PME 
+rcoulomb            =  0.9 
+rvdw                =  1.4 
+fourierspacing          =  0.12 
+fourier_nx       =  0 
+fourier_ny       =  0 
+fourier_nz       =  0 
+pme_order        =  4 
+ewald_rtol       =  1e-5 
+optimize_fft     =  yes 
+; 
+;       Energy minimization stuff 
+; 
+emtol               =  1000.0 
+emstep              =  0.01 

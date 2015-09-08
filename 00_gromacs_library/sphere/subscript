@@ -1,0 +1,12 @@
+#PBS -r n -l cput=1:30:00 -l walltime=1:30:00
+#PBS -q dque
+
+#PBS -l nodes=2:ppn=2
+#PBS -N   all_NAME
+echo "$PBS_JOBID started on `hostname` at `date`"
+echo nodes:
+cat $PBS_NODEFILE
+cd /home/imihalek/gromacs/homodimers/other/NAME
+/home/imihalek/gromacs/gromacs.pl NAME_dimer
+echo "$PBS_JOBID done on `hostname` at `date`"
+touch done
