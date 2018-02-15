@@ -1,7 +1,7 @@
 #!/usr/bin/python -u
 
 from gmx_utils.python import run_setup
-
+from gmx_utils.python.run_setup import GmxEngine
 
 #########################################
 def echo_options(run_options):
@@ -15,8 +15,8 @@ def main():
 
 	run_options = run_setup.parse_commandline()
 	echo_options(run_options)
-
-	executables = run_setup.get_executables()
+	print "#########################"
+	gmx_engine = GmxEngine("/usr/local/gromacs/bin/GMXRC.bash")
 
 
 	return True

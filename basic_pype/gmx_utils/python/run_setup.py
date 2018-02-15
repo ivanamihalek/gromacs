@@ -24,23 +24,31 @@ def parse_commandline():
 						dest="posres", help='position restrained run (defaults to False)')
 
 	run_options = parser.parse_args(sys.argv[1:])
-
 	return run_options
 
+
 #########################################
-def get_executables():
+class GmxEngine:
 
-	# the paths here should correspond to those in /usr/local/gromacs/bin/GMXRC.bash
-	gmx_bash = "/usr/local/gromacs/bin/GMXRC.bash"
-	if not os.path.exists(gmx_bash):
-		print gmx_bash, "not found"
-		exit(2)
+	# we rely on everything being accesible from the paths set in GMXRC.bash
+	# that is, on what is currently the standard way of installing gromacs
+	def __init__(self, gmx_bash):
+		if not os.path.exists(gmx_bash):
+			print gmx_bash, "not found"
+			exit(2)
+		# check if the remaining gmx executables can be found in the paths specified in gmx_bash
+		# (TODO: gmx_bash will also set paths for libraries which we are not checking)
+		self.gmx_bash = gmx_bash
+		self.gmx_executables = ['gmx', 'blub']
+		for executable in self.gmx_executables:
+			command = ['bash', '-c', "(source %s && which %s) | wc -l  " % (self.gmx_bash, executable)]
+			proc = subprocess.Popen(command, stdout=subprocess.PIPE)
+			# communicate() returns a tuple (stdoutdata, stderrdata)
+			# and closes the input pype for the subprocess
+			number_of_returned_lines =  int(proc.communicate()[0])
+			if number_of_returned_lines==0:
+				print executable, "not found in the path specified in", self.gmx_bash
 
-	command = ['bash', '-c', "source %s && gmx " % gmx_bash]
-	#command = ['bash', '-c', "gmx "]
-	proc = subprocess.Popen(command, stdout = subprocess.PIPE)
-	for line in proc.stdout:
-		print line
-	proc.communicate() # this closes the input pute for the subprocess
-	exit()
+
+
 
