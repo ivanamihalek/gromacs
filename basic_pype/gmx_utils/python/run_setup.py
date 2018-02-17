@@ -26,6 +26,12 @@ def parse_commandline():
 						dest="posres", help='position restrained run (defaults to False)')
 
 	run_options = parser.parse_args(sys.argv[1:])
+
+	# basic sanity check:
+	if run_options.pdb=="none" and run_options.ligands.length()==0:
+		print "No protein, no small molecule ... what are we doing here?"
+		exit(1)
+
 	return run_options
 
 
@@ -41,19 +47,26 @@ class GmxEngine:
 		# check if the remaining gmx executables can be found in the paths specified in gmx_bash
 		# (TODO: gmx_bash will also set paths for libraries which we are not checking)
 		self.gmx_bash = gmx_bash
-		self.gmx_executables = ['gmx', 'blub']
-		for executable in self.gmx_executables:
-			command = ['bash', '-c', "(source %s && which %s) | wc -l " % (self.gmx_bash, executable)]
-			proc = subprocess.Popen(command, stdout=subprocess.PIPE)
-			# communicate() returns a tuple (stdoutdata, stderrdata)
-			# and closes the input pype for the subprocess
-			number_of_returned_lines =  int(proc.communicate()[0])
-			if number_of_returned_lines==0:
-				print executable, "not found in the path specified in", self.gmx_bash
+		command = ['bash', '-c', "(source %s && which %s) | wc -l " % (self.gmx_bash, 'gmx')]
+		proc = subprocess.Popen(command, stdout=subprocess.PIPE)
+		# communicate() returns a tuple (stdoutdata, stderrdata)
+		# and closes the input pype for the subprocess
+		number_of_returned_lines =  int(proc.communicate()[0])
+		if number_of_returned_lines==0:
+			print "gmx not found in the path specified in", self.gmx_bash
+			exit(1)
+		if number_of_returned_lines>1:
+			print "multiple gmx found in the path specified in", self.gmx_bash
+			exit(1)
+		command = ['bash', '-c', "source %s && which %s" % (self.gmx_bash, 'gmx')]
+		self.gmx = subprocess.Popen(command, stdout=subprocess.PIPE).communicate()[0].rstrip()
+		print self.gmx
+
+
 
 
 #########################################
-class Parameters:
+class GmxParameters:
 
 	def __init__(self, run_options):  # maybe one day I can have some parameters passed for the most typical runs
 		self.forcefield  = "amber99sb"
@@ -82,15 +95,18 @@ class Parameters:
 #########################################
 class WorkdirStructure:
 
-	def __init__(self, run_options, workdir_names):
-		self.check_workdir_existence(run_options.workdir, workdir_names)
-		self.in_dir  = workdir_names[0]
-		self.top_dir = workdir_names[1]
-		self.em1_dir = workdir_names[2]
-		self.em2_dir = workdir_names[3]
-		self.pr1_dir = workdir_names[4]
-		self.pr2_dir = workdir_names[5]
-		self.production_dir =  workdir_names[6]
+	workdir_names = ["00_input", "01_topology", "02_em_steepest", "03_em_lbfgs",
+					"04_nvt_eq", "05_mpt_eq", "06_production"]
+
+	def __init__(self, run_options):
+		self.check_workdir_existence(run_options.workdir, self.workdir_names)
+		self.in_dir  = self.workdir_names[0]
+		self.top_dir = self.workdir_names[1]
+		self.em1_dir = self.workdir_names[2]
+		self.em2_dir = self.workdir_names[3]
+		self.pr1_dir = self.workdir_names[4]
+		self.pr2_dir = self.workdir_names[5]
+		self.production_dir =  self.workdir_names[6]
 		## check run-specific setup requirements
 		wp = run_options.workdir
 		if not run_options.pdb=="none":
@@ -107,10 +123,12 @@ class WorkdirStructure:
 		if not os.path.exists(fullpath):
 			print fullpath, "not found"
 			exit(1)
+
 	def bedir_or_die(self, fullpath):
 		if not os.path.isdir(fullpath):
 			print fullpath, "not found"
 			exit(1)
+
 	def check_workdir_existence (self, wkdir_path, workdir_names):
 		for wd in workdir_names:
 			self.exist_or_die(wkdir_path+"/"+wd)
