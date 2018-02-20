@@ -1,6 +1,5 @@
 import argparse
 import sys, os
-import pprint
 import subprocess
 #########################################
 def parse_commandline():
@@ -10,13 +9,13 @@ def parse_commandline():
 		print "or"
 		print "%s -p <pdb_root> [-l <ligand list>] [-w <workdir>] [--remd] [--min] [--posres]" % sys.argv[0]
 		exit(1)
-
+	pwd = os.getcwd()
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-p','--pdb', metavar='pdbfile', type=str,  default="none",
 						dest="pdb", help='input pdb file (peptide, ions, and ligands)')
 	parser.add_argument('-l','--ligands', metavar='ligand', type=str, nargs='+', default=[],
 						dest="ligands", help='list of ligand names')
-	parser.add_argument('-w','--workdir', metavar='workdir', type=str, default=".",
+	parser.add_argument('-w','--workdir', metavar='workdir', type=str, default=pwd,
 						dest="workdir", help='work directory - check WorkdirStructure for the expected structure')
 	parser.add_argument('-m','--min', action='store_true', default=False,
 						dest="minimization", help='energy minimization run (defaults to False)')
@@ -34,63 +33,6 @@ def parse_commandline():
 
 	return run_options
 
-
-#########################################
-class GmxEngine:
-
-	# we rely on everything being accesible from the paths set in GMXRC.bash
-	# that is, on what is currently the standard way of installing gromacs
-	def __init__(self, gmx_bash):
-		if not os.path.exists(gmx_bash):
-			print gmx_bash, "not found"
-			exit(2)
-		# check if the remaining gmx executables can be found in the paths specified in gmx_bash
-		# (TODO: gmx_bash will also set paths for libraries which we are not checking)
-		self.gmx_bash = gmx_bash
-		command = ['bash', '-c', "(source %s && which %s) | wc -l " % (self.gmx_bash, 'gmx')]
-		proc = subprocess.Popen(command, stdout=subprocess.PIPE)
-		# communicate() returns a tuple (stdoutdata, stderrdata)
-		# and closes the input pype for the subprocess
-		number_of_returned_lines =  int(proc.communicate()[0])
-		if number_of_returned_lines==0:
-			print "gmx not found in the path specified in", self.gmx_bash
-			exit(1)
-		if number_of_returned_lines>1:
-			print "multiple gmx found in the path specified in", self.gmx_bash
-			exit(1)
-		command = ['bash', '-c', "source %s && which %s" % (self.gmx_bash, 'gmx')]
-		self.gmx = subprocess.Popen(command, stdout=subprocess.PIPE).communicate()[0].rstrip()
-		print self.gmx
-
-
-
-
-#########################################
-class GmxParameters:
-
-	def __init__(self, run_options):  # maybe one day I can have some parameters passed for the most typical runs
-		self.forcefield  = "amber99sb"
-		self.water = "tip3p"
-		# self.forcefield = "oplsaa"
-		# self.forcefield = "gmx"
-		# self.box_type   = "cubic"
-		self.box_type    = "triclinic"
-		self.box_edge    =  1.2 # distance of the box edge from the molecule in nm
-		self.neg_ion     = "Cl" # theses names depend on the choice of the forcefield (check "ions.itp")
-		self.pos_ion     = "Na"
-		self.genion_solvent_code = 12
-
-		if self.forcefield=="oplsaa" or  self.forcefield=="amber99sb":
-			self.neg_ion  = "CL"
-			self.pos_ion  = "NA"
-
-		if run_options.pdb=="none":
-			if run_options.posres:
-				self.box_edge = 1.2
-			else:
-				self.box_edge = 1.6
-		else:
-			self.box_edge = 0.7
 
 #########################################
 class WorkdirStructure:
