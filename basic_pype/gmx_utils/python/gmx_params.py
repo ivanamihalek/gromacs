@@ -10,7 +10,7 @@ class GmxParameters:
 		# self.box_type   = "cubic"
 		self.box_type    = "triclinic"
 		self.box_edge    = "1.2" # distance of the box edge from the molecule in nm
-		self.neg_ion     = "Cl" # theses names depend on the choice of the forcefield (check "ions.itp")
+		self.neg_ion     = "Cl" # these names depend on the choice of the forcefield (check "ions.itp")
 		self.pos_ion     = "Na"
 		self.genion_solvent_code = "12"
 

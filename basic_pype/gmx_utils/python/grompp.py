@@ -36,6 +36,8 @@ def generate(params):
 
 	# TODO: fix number of waters (if some were present in the initial structure)
 
+	# TODO group.ndx
+
 	return
 
 

@@ -3,21 +3,58 @@ import os, subprocess
 #########################################
 def add(params):
 
-	print "IMPLEMENT counterions"
-	exit(3)
-
 	# change to topology directory
 	currdir = params.rundirs.em1_dir
 	os.chdir("/".join([params.run_options.workdir, currdir]))
 	pdbname      = params.run_options.pdb
+	# previously generated tpr file - we will add counterions
+	# if the system complained there was non-zero total charge
+	[log_previous, logerr_previous]  = params.gmx_engine.lognames('grompp')
+	if not os.path.exists(logerr_previous):
+		print "\t in counterions.add(): %s not found " % logerr_previous
+		print "\t run grompp once to establish the total charge in the system "
+		exit(1)
+	# grep -s = suppress errmsg about nonexisting files
+	# TODO what do I do if they change the error message?
+	command = ['bash', '-c', "grep  -s \'System has non-zero total charge\' %s" % logerr_previous]
+	ret = subprocess.Popen(command, stdout=subprocess.PIPE).communicate()
+	# communicate() returns a tuple (stdoutdata, stderrdata)
+	# and closes the input pype for the subprocess
+	zero_charge = not (ret and len(ret[0])>0 and 'charge' in ret[0])
+
+	if zero_charge:
+		print "\t the total charge in the system in zero"
+		return
+
+	print "\t there is nonzero charge in the system - adding counterions"
+	# parse ret to get  the charge
+	charge = int(round(float(ret[0].rstrip().split()[-1])))
+	if charge>0:
+		ion_request = " -nname %s -nn %d " % (params.physical.neg_ion, charge)
+	else:
+		# notice we turn the charge variable into its absolute value
+		ion_request = " -pname %s -np %d " % (params.physical.pos_ion, -charge)
+
+	print ion_request
+	exit()
+
+	topfile      = "../%s/%s.top"%(params.rundirs.top_dir,pdbname)
+
+	program = "genion"
+	tprfile_previous  = pdbname + ".em_input.tpr"
+	ion_gro           = pdbname + ".ion.gro"
+	cmdline_args  = "-s %s -o %s" % (tprfile_previous, ion_gro)
+
+
+	return
+
+'''
 	topfile      = "../%s/%s.top"%(params.rundirs.top_dir,pdbname)
 	grofile_in   = "../%s/%s.water.gro"%(params.rundirs.top_dir,pdbname)
 	paramsfile   = "../%s/em_steep.mdp"%(params.rundirs.in_dir)
 
 	# check whether there is the warning about the charged system in the err.log file ffrom grompp
 	# if
-
-
 
 	tprfile_out  = pdbname+".em_input.tpr"
 	if os.path.exists(tprfile_out):
@@ -45,8 +82,8 @@ def add(params):
 	params.gmx_engine.check_logs_for_error(program, false_alarms)
 
 	# TODO: fix number of waters (if some were present in the initial structure)
+'''
 
-	return
 
 
 
