@@ -23,7 +23,6 @@ class GmxEngine:
 		if number_of_returned_lines>1:
 			print "multiple gmx found in the path specified in", self.gmx_bash
 			exit(1)
-		self.gmx = "source %s && gmx" % self.gmx_bash # making sure that gmx sees the expected environment
 		return
 
 
@@ -36,7 +35,7 @@ class GmxEngine:
 	def check_logs_for_error(self, program, tolerated_error_msgs):
 		[logname,errlogname] = self.lognames(program)
 		for logf in [logname,errlogname]:
-			# gcq is the funny quote, which funnily enough can contain the owrd error in it
+			# gcq is the funny quote, which funnily enough can contain the word error in it
 			cmd = "grep -i error %s | grep -v gcq"%logf
 			proc = subprocess.Popen(["bash", "-c", cmd], stdout=subprocess.PIPE)
 			for line in proc.stdout.readlines():
@@ -48,13 +47,17 @@ class GmxEngine:
 		return
 
 	###########################
-	def run(self, program, cmdline_args, message=None, higher_level_log=None):
+	def run(self, program, cmdline_args, message=None, higher_level_log=None, pipein=None):
 		if message: print "\t running %s: %s" % (program, message)
 		[logname,errlogname] = self.lognames(program)
 		log    = open(logname, "w")
 		errlog = open(errlogname, "w")
-		cmd  = "%s %s " % (self.gmx, program)
-		cmd += cmdline_args
+		# sourcing the bash script ensures that  gmx sees the expected environment
+		if pipein:
+			cmd    = "source %s && (%s | gmx %s %s)" % (self.gmx_bash, pipein, program, cmdline_args)
+		else:
+			cmd    = "source %s && (gmx %s %s)" % (self.gmx_bash, program, cmdline_args)
+
 		if higher_level_log: higher_level_log.write(cmd+"\n")
 		failed = False
 		try:
@@ -70,3 +73,7 @@ class GmxEngine:
 		subprocess.Popen(["bash", "-c", "rm -f \#*"])
 		if failed: exit(2)
 		return
+
+
+
+
