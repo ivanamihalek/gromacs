@@ -16,7 +16,7 @@ def add(params):
 		return
 	for infile in [topfile, grofile_in]:
 		if not os.path.exists(infile):
-			print "\t %s not found for box  (?)" % (infile)
+			print "\t in water.add(): %s not found (?)" % (infile)
 			exit(1)
 
 	# earlier program  genbox was split itno solvate and insert-molecules
@@ -30,6 +30,10 @@ def add(params):
 
 	params.command_log.write("in %s:\n"%(currdir))
 	params.gmx_engine.run(program, cmdline_args, "adding water", params.command_log)
+	false_alarms = ["masses will be determined based on residue and atom names", "radii will be determined"]
+	params.gmx_engine.check_logs_for_error(program, false_alarms)
+
+	# TODO: fix number of waters (if some were present in the initial structure)
 
 	return
 

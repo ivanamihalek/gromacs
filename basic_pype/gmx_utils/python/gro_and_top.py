@@ -40,6 +40,8 @@ def generate(params):
 		##########################################
 		# here is where the run actually happens:
 		params.gmx_engine.run(program, cmdline_args,"generating top and gro files for the peptide", params.command_log)
+		# the things in bracket are some false alarm msgs gmx sometimes issues
+		params.gmx_engine.check_logs_for_error(program,["masses will be determined based on residue and atom names"])
 		##########################################
 
 		if os.path.exists("pdb2gmx_in"): subprocess.Popen(["bash", "-c", "rm -f pdb2gmx_in"])

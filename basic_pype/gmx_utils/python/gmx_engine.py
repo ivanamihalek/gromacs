@@ -26,10 +26,33 @@ class GmxEngine:
 		self.gmx = "source %s && gmx" % self.gmx_bash # making sure that gmx sees the expected environment
 		return
 
+
+	###########################
+	@staticmethod
+	def lognames(program): # static method does not need 'self'
+		return ["%s.log"%program,"%s.err.log"%program]
+
+	###########################
+	def check_logs_for_error(self, program, tolerated_error_msgs):
+		[logname,errlogname] = self.lognames(program)
+		for logf in [logname,errlogname]:
+			# gcq is the funny quote, which funnily enough can contain the owrd error in it
+			cmd = "grep -i error %s | grep -v gcq"%logf
+			proc = subprocess.Popen(["bash", "-c", cmd], stdout=subprocess.PIPE)
+			for line in proc.stdout.readlines():
+				if not line in tolerated_error_msgs:
+					print
+					print "%s ended in error state. Please check the file  %s.\n" % (program, logf)
+					print line
+					exit(3)
+		return
+
+	###########################
 	def run(self, program, cmdline_args, message=None, higher_level_log=None):
 		if message: print "\t running %s: %s" % (program, message)
-		log    = open("%s.log"%program, "w")
-		errlog = open("%s.err.log"%program, "w")
+		[logname,errlogname] = self.lognames(program)
+		log    = open(logname, "w")
+		errlog = open(errlogname, "w")
 		cmd  = "%s %s " % (self.gmx, program)
 		cmd += cmdline_args
 		if higher_level_log: higher_level_log.write(cmd+"\n")

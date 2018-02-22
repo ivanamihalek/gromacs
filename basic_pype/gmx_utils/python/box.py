@@ -22,6 +22,8 @@ def generate(params):
 
 	params.command_log.write("in %s:\n"%(currdir))
 	params.gmx_engine.run(program, cmdline_args, "placing system in a box", params.command_log)
+	false_alarms = ["masses will be determined based on residue and atom names", "No boxtype specified"]
+	params.gmx_engine.check_logs_for_error(program, false_alarms)
 
 	return
 
