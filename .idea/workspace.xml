@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="091c317d-ccbb-4472-838b-9c88fb7f00b7" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/01_gmx_pype.py" afterPath="$PROJECT_DIR$/basic_pype/01_gmx_pype.py" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py" />
+      <change beforePath="$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gmx_engine.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gmx_engine.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="75" column="14" lean-forward="true" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+            <state relative-caret-position="771">
+              <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -52,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="steepest.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="steepest.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="30" column="14" lean-forward="false" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+            <state relative-caret-position="612">
+              <caret line="34" column="4" lean-forward="false" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -93,8 +88,8 @@
         <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py" />
         <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py" />
         <option value="$PROJECT_DIR$/basic_pype/01_gmx_pype.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py" />
         <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py" />
+        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py" />
       </list>
     </option>
   </component>
@@ -522,20 +517,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py">
+    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="14" lean-forward="false" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+        <state relative-caret-position="771">
+          <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -550,10 +535,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
+    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="75" column="14" lean-forward="true" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+        <state relative-caret-position="828">
+          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="34" column="4" lean-forward="false" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
           <folding />
         </state>
       </provider>
