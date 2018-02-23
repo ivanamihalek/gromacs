@@ -2,7 +2,7 @@
 
 from argparse import Namespace
 from gmx_utils.python import run_setup, gro_and_top, box, water, grompp
-from gmx_utils.python import counterions
+from gmx_utils.python import counterions, steepest
 from gmx_utils.python.run_setup  import WorkdirStructure
 from gmx_utils.python.gmx_engine import GmxEngine
 from gmx_utils.python.gmx_params import GmxParameters
@@ -50,9 +50,9 @@ def main():
 	water.add(params)
 
 	###############
-	# grompp = generate parametrized topology file
+	# grompp = generate parametrized topology file (tpr; binary; complete input compiled)
 	###############
-	grompp.generate(params)
+	grompp.generate(params, 'water')
 
 	###############
 	# add counterions if the grompp warned us about the charged system
@@ -62,6 +62,7 @@ def main():
 	###############
 	# geometry "minimization"  - round 1
 	###############
+	steepest.minimize(params)
 
 	###############
 	# geometry "minimization"  - round 2

@@ -1,5 +1,7 @@
 import os, subprocess
 
+from ..python import grompp
+
 #########################################
 def add(params):
 
@@ -14,6 +16,7 @@ def add(params):
 		print "\t in counterions.add(): %s not found " % logerr_previous
 		print "\t run grompp once to establish the total charge in the system "
 		exit(1)
+
 	# grep -s = suppress errmsg about nonexisting files
 	# TODO what do I do if they change the error message?
 	command = ['bash', '-c', "grep  -s \'System has non-zero total charge\' %s" % logerr_previous]
@@ -21,13 +24,11 @@ def add(params):
 	# communicate() returns a tuple (stdoutdata, stderrdata)
 	# and closes the input pype for the subprocess
 	zero_charge = not (ret and len(ret[0])>0 and 'charge' in ret[0])
-
 	if zero_charge:
 		print "\t the total charge in the system is zero"
 		return
 
 	print "\t there is nonzero charge in the system"
-
 	pdbname      = params.run_options.pdb
 	topfile      = "../%s/%s.top"%(params.rundirs.top_dir,pdbname)
 	tprfile_previous  = pdbname + ".em_input.tpr"
@@ -41,8 +42,11 @@ def add(params):
 	water_group_number = hack_water_group_number_out_of_genion(params, tprfile_previous)
 
 	program = "genion"
-	ion_gro = pdbname + ".ion.gro"
-	cmdline_args  = "-s %s -o %s " % (tprfile_previous, ion_gro)
+	# say, we keep all the geometry files in top_dir
+	ion_gro = "../%s/%s.ions.gro"%(params.rundirs.top_dir,pdbname)
+	# when -p *top is present the original topology file is modified in place:
+	# the number of SOL molecules is reduced by the number that was replaced by ions
+	cmdline_args  = "-s %s -o %s -p %s" % (tprfile_previous, ion_gro, topfile)
 	cmdline_args += ion_request
 
 	params.command_log.write("in %s:\n"%(currdir))
@@ -50,8 +54,9 @@ def add(params):
 	false_alarms = ["turning of free energy, will use lambda=0"]
 	params.gmx_engine.check_logs_for_error(program, false_alarms)
 
-	print "now check the top file and grompp again"
-	exit()
+	# now repeat the tpr file generation
+	os.remove(tprfile_previous)
+	grompp.generate(params, 'ions')
 
 	return
 
@@ -104,7 +109,7 @@ def hack_water_group_number_out_of_genion(params, tprfile):
 	for line in infile:
 		field = line.split()
 		if len(field)<4: continue
-		if field[0]=='Group' and field[3]=='Water)':
+		if field[0]=='Group' and field[3]=='SOL)':
 			water_group_number = field[1]
 			break
 	infile.close()

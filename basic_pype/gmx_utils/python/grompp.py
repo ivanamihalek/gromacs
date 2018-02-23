@@ -1,13 +1,13 @@
 import os, subprocess
 
 #########################################
-def generate(params):
+def generate(params, water_or_ions):
 	# change to topology directory
 	currdir = params.rundirs.em1_dir
 	os.chdir("/".join([params.run_options.workdir, currdir]))
 	pdbname      = params.run_options.pdb
 	topfile      = "../%s/%s.top"%(params.rundirs.top_dir,pdbname)
-	grofile_in   = "../%s/%s.water.gro"%(params.rundirs.top_dir,pdbname)
+	grofile_in   = "../%s/%s.%s.gro"%(params.rundirs.top_dir,pdbname, water_or_ions)
 	paramsfile   = "../%s/em_steep.mdp"%(params.rundirs.in_dir)
 	tprfile_out  = pdbname+".em_input.tpr"
 	if os.path.exists(tprfile_out):
@@ -35,6 +35,8 @@ def generate(params):
 	params.gmx_engine.check_logs_for_error(program, false_alarms)
 
 	# TODO: fix number of waters (if some were present in the initial structure)
+	# TODO: in that case, when fixing the number of water molecules, check that
+	# -p *top option for genion still results in the correct number of SOL or water molecules
 
 	# TODO group.ndx
 

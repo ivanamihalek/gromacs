@@ -33,6 +33,7 @@ class GmxEngine:
 
 	###########################
 	def check_logs_for_error(self, program, tolerated_error_msgs):
+		# it should be in logerr, but I do not trust these kids to be systematic
 		[logname,errlogname] = self.lognames(program)
 		for logf in [logname,errlogname]:
 			# gcq is the funny quote, which funnily enough can contain the word error in it
@@ -74,6 +75,8 @@ class GmxEngine:
 		if failed: exit(2)
 		return
 
-
-
-
+	###########################
+	def convergence_line(self, program):
+		[logname,errlogname] = self.lognames(program)
+		cmd  = "grep converge %s | tail -n1" % errlogname
+		return subprocess.Popen(["bash", "-c", cmd]).communicate()[0]
