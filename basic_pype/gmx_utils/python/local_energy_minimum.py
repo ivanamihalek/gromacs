@@ -1,9 +1,16 @@
 import os, subprocess
 
+from ..python import grompp
+
 #########################################
-def minimize(params):
+def find(params, stage):
+
+	#grompp = generate parametrized topology file (tpr; binary; complete input compiled)
+	prev_stage = {'em1':'ions', 'em2':'em1'}
+	grompp.generate(params, prev_stage[stage]) # use the previous step to construct the tpr file
+
 	# change to topology directory
-	currdir = params.rundirs.em1_dir
+	currdir = params.rundirs.em2_dir
 	os.chdir("/".join([params.run_options.workdir, currdir]))
 	pdbname      = params.run_options.pdb
 
@@ -22,7 +29,7 @@ def minimize(params):
 	program = "mdrun" # nt 1; run multiple trajectories instead
 	# mdrun will produce trajectory and edr (energy) files,  whether we ask for it or not,
 	# so we might just as well name them so we can remove them later
-	cmdline_args  = "-s %s -c %s -nt 1 -o %s -e %s" % (tprfile_in, grofile_out, traj_out, edrfile_out)
+	cmdline_args  = " -s %s -c %s -nt 1 -o %s -e %s " % (tprfile_in, grofile_out, traj_out, edrfile_out)
 
 	params.command_log.write("in %s:\n" % (currdir))
 	params.gmx_engine.run(program, cmdline_args, "looking for the local energy minimum", params.command_log)
@@ -30,10 +37,8 @@ def minimize(params):
 	params.gmx_engine.check_logs_for_error(program, false_alarms)
 
 	print "\t ", params.gmx_engine.convergence_line(program)
+
 	os.remove(traj_out)
 	os.remove(edrfile_out)
-	
-	return
-
 
 

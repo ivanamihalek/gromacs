@@ -5,6 +5,9 @@ from ..python import grompp
 #########################################
 def add(params):
 
+	# try running the preprocessor, and see if it complains about the charge in the system
+	grompp.generate(params, 'water')
+
 	# change to topology directory
 	currdir = params.rundirs.em1_dir
 	os.chdir("/".join([params.run_options.workdir, currdir]))
@@ -26,6 +29,11 @@ def add(params):
 	zero_charge = not (ret and len(ret[0])>0 and 'charge' in ret[0])
 	if zero_charge:
 		print "\t the total charge in the system is zero"
+		# our 'ions' file is the same as the 'water' file
+		pdbname      = params.run_options.pdb
+		os.chdir("/".join([params.run_options.workdir, params.rundirs.top_dir]))
+		cmd          = "ln -s %s.water.gro  %s.ions.gro " % (pdbname,pdbname)
+		subprocess.call(["bash", "-c", cmd])
 		return
 
 	print "\t there is nonzero charge in the system"
@@ -53,10 +61,8 @@ def add(params):
 	params.gmx_engine.run(program, cmdline_args, "adding couterions",params.command_log,"echo %s"%water_group_number)
 	false_alarms = ["turning of free energy, will use lambda=0"]
 	params.gmx_engine.check_logs_for_error(program, false_alarms)
-
-	# now repeat the tpr file generation
 	os.remove(tprfile_previous)
-	grompp.generate(params, 'ions')
+
 
 	return
 

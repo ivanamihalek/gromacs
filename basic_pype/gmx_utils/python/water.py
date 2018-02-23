@@ -1,5 +1,6 @@
 import os, subprocess
 
+
 #########################################
 def add(params):
 	# change to topology directory
@@ -34,6 +35,8 @@ def add(params):
 	params.gmx_engine.check_logs_for_error(program, false_alarms)
 
 	# TODO: fix number of waters (if some were present in the initial structure)
+	# TODO: in that case, when fixing the number of water molecules, check that
+	# -p *top option for genion still results in the correct number of SOL or water molecules
 
 	return
 

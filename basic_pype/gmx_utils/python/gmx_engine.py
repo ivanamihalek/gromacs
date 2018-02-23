@@ -78,5 +78,6 @@ class GmxEngine:
 	###########################
 	def convergence_line(self, program):
 		[logname,errlogname] = self.lognames(program)
-		cmd  = "grep converge %s | tail -n1" % errlogname
-		return subprocess.Popen(["bash", "-c", cmd]).communicate()[0]
+		cmd  = "(grep converge %s | tail -n1)" % errlogname
+		ret = subprocess.Popen(["bash", "-c", cmd]).communicate()
+		return ret[0]  # the stdout part

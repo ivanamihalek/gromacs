@@ -1,15 +1,44 @@
 import os, subprocess
 
+
 #########################################
-def generate(params, water_or_ions):
-	# change to topology directory
-	currdir = params.rundirs.em1_dir
-	os.chdir("/".join([params.run_options.workdir, currdir]))
+def dir_and_files(params, previous_stage):
+
+	[currdir, topfile, grofile_in, paramsfile, tprfile_out] = ['']*5
 	pdbname      = params.run_options.pdb
-	topfile      = "../%s/%s.top"%(params.rundirs.top_dir,pdbname)
-	grofile_in   = "../%s/%s.%s.gro"%(params.rundirs.top_dir,pdbname, water_or_ions)
-	paramsfile   = "../%s/em_steep.mdp"%(params.rundirs.in_dir)
-	tprfile_out  = pdbname+".em_input.tpr"
+
+	if previous_stage in ['water', 'ions']:
+		currdir = params.rundirs.em1_dir
+		topfile      = "../%s/%s.top"       % (params.rundirs.top_dir, pdbname)
+		grofile_in   = "../%s/%s.%s.gro"    % (params.rundirs.top_dir, pdbname, previous_stage)
+		paramsfile   = "../%s/em_steep.mdp" % (params.rundirs.in_dir)
+		tprfile_out  = pdbname+".em_input.tpr"
+
+	elif previous_stage== 'em1':
+		currdir = params.rundirs.em2_dir
+		topfile      = "../%s/%s.top"        % (params.rundirs.em1_dir, pdbname)
+		grofile_in   = "../%s/%s.em_out.gro" % (params.rundirs.em1_dir, pdbname)
+		paramsfile   = "../%s/em_lbfgs.mdp"  % (params.rundirs.in_dir)
+		tprfile_out  = pdbname+".em_input.tpr"
+
+	elif previous_stage== 'em2':
+		currdir = params.rundirs.em2_dir
+		topfile      = "../%s/%s.top"        % (params.rundirs.em2_dir, pdbname)
+		grofile_in   = "../%s/%s.em_out.gro" % (params.rundirs.em2_dir, pdbname)
+		paramsfile   = "../%s/em_lbfgs.mdp"  % (params.rundirs.in_dir)
+		tprfile_out  = pdbname+".pr_input.tpr"
+
+
+	return [currdir, topfile, grofile_in, paramsfile, tprfile_out]
+
+
+#########################################
+def generate(params, stage):
+
+
+	[currdir, topfile, grofile_in, paramsfile, tprfile_out] = dir_and_files(params, stage)
+	# change to topology directory
+	os.chdir("/".join([params.run_options.workdir, currdir]))
 	if os.path.exists(tprfile_out):
 		print "\t %s found" % (tprfile_out)
 		return
@@ -18,11 +47,6 @@ def generate(params, water_or_ions):
 			print "\t in grompp.generate(): %s not found (?)" % (infile)
 			exit(1)
 
-	# earlier program  genbox was split itno solvate and insert-molecules
-	# the latter inserts -nmol copies of the system specified in the -ci input file - I guess I don'e need this
-	# (perhaps for lipid generation in the simulation of a membrane bound system?)
-
-	# a layer of water can be added - should this be tried?
 	program = "grompp"
 	cmdline_args  = "-c %s -p %s " % (grofile_in, topfile)
 	cmdline_args += "-f %s -o %s " % (paramsfile, tprfile_out)
@@ -34,11 +58,7 @@ def generate(params, water_or_ions):
 	false_alarms = []
 	params.gmx_engine.check_logs_for_error(program, false_alarms)
 
-	# TODO: fix number of waters (if some were present in the initial structure)
-	# TODO: in that case, when fixing the number of water molecules, check that
-	# -p *top option for genion still results in the correct number of SOL or water molecules
-
-	# TODO group.ndx
+	# TODO group.ndx  - when and where do I need that?
 
 	return
 

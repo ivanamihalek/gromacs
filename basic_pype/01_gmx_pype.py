@@ -1,12 +1,11 @@
 #!/usr/bin/python -u
 
 from argparse import Namespace
-from gmx_utils.python import run_setup, gro_and_top, box, water, grompp
-from gmx_utils.python import counterions, steepest
+from gmx_utils.python import run_setup, gro_and_top, box, water
+from gmx_utils.python import counterions, local_energy_minimum
 from gmx_utils.python.run_setup  import WorkdirStructure
 from gmx_utils.python.gmx_engine import GmxEngine
 from gmx_utils.python.gmx_params import GmxParameters
-
 
 #########################################
 def echo_options(run_options):
@@ -50,30 +49,26 @@ def main():
 	water.add(params)
 
 	###############
-	# grompp = generate parametrized topology file (tpr; binary; complete input compiled)
-	###############
-	grompp.generate(params, 'water')
-
-	###############
-	# add counterions if the grompp warned us about the charged system
+	# add counterions if needed
 	###############
 	counterions.add(params)
 
 	###############
-	# geometry "minimization"  - round 1
+	# geometry "minimization"  - round 1; method: steepest decent
 	###############
-	steepest.minimize(params)
+	local_energy_minimum.find(params, 'em1')
 
 	###############
-	# geometry "minimization"  - round 2
+	# geometry "minimization"  - round 2; method: LBFGS
+	###############
+	local_energy_minimum.find(params, 'em2')
+
+	###############
+	# position restrained md    -  NVT
 	###############
 
 	###############
-	# position restained md    -  NVT
-	###############
-
-	###############
-	# position restained md    -  NPT
+	# position restrained md    -  NPT
 	###############
 
 	###############
