@@ -10,8 +10,8 @@ def find(params, stage):
 	grompp.generate(params, prev_stage[stage]) # use the previous step to construct the tpr file
 
 	# change to topology directory
-	currdir = params.rundirs.em2_dir
-	os.chdir("/".join([params.run_options.workdir, currdir]))
+	currdir = {'em1': params.rundirs.em1_dir, 'em2': params.rundirs.em2_dir}
+	os.chdir("/".join([params.run_options.workdir, currdir[stage]]))
 	pdbname      = params.run_options.pdb
 
 	tprfile_in   = pdbname+".em_input.tpr"
@@ -23,7 +23,7 @@ def find(params, stage):
 		return
 	for infile in [tprfile_in]:
 		if not os.path.exists(infile):
-			print "\t in grompp.generate(): %s not found (?)" % (infile)
+			print "\t in local_energy_minimum.find(%s): %s not found (?)" % (stage, infile)
 			exit(1)
 
 	program = "mdrun" # nt 1; run multiple trajectories instead

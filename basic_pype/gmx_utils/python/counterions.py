@@ -32,7 +32,8 @@ def add(params):
 		# our 'ions' file is the same as the 'water' file
 		pdbname      = params.run_options.pdb
 		os.chdir("/".join([params.run_options.workdir, params.rundirs.top_dir]))
-		cmd          = "ln -s %s.water.gro  %s.ions.gro " % (pdbname,pdbname)
+		# f = force; remove xisting destination
+		cmd          = "ln -sf %s.water.gro  %s.ions.gro " % (pdbname,pdbname)
 		subprocess.call(["bash", "-c", cmd])
 		return
 

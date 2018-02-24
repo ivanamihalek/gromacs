@@ -6,28 +6,25 @@ def dir_and_files(params, previous_stage):
 
 	[currdir, topfile, grofile_in, paramsfile, tprfile_out] = ['']*5
 	pdbname      = params.run_options.pdb
+	topfile      = "../%s/%s.top"       % (params.rundirs.top_dir, pdbname)
 
 	if previous_stage in ['water', 'ions']:
 		currdir = params.rundirs.em1_dir
-		topfile      = "../%s/%s.top"       % (params.rundirs.top_dir, pdbname)
 		grofile_in   = "../%s/%s.%s.gro"    % (params.rundirs.top_dir, pdbname, previous_stage)
 		paramsfile   = "../%s/em_steep.mdp" % (params.rundirs.in_dir)
-		tprfile_out  = pdbname+".em_input.tpr"
+		tprfile_out  = pdbname + ".em_input.tpr"
 
 	elif previous_stage== 'em1':
 		currdir = params.rundirs.em2_dir
-		topfile      = "../%s/%s.top"        % (params.rundirs.em1_dir, pdbname)
 		grofile_in   = "../%s/%s.em_out.gro" % (params.rundirs.em1_dir, pdbname)
 		paramsfile   = "../%s/em_lbfgs.mdp"  % (params.rundirs.in_dir)
-		tprfile_out  = pdbname+".em_input.tpr"
+		tprfile_out  = pdbname + ".em_input.tpr"
 
 	elif previous_stage== 'em2':
-		currdir = params.rundirs.em2_dir
-		topfile      = "../%s/%s.top"        % (params.rundirs.em2_dir, pdbname)
+		currdir = params.rundirs.pr1_dir
 		grofile_in   = "../%s/%s.em_out.gro" % (params.rundirs.em2_dir, pdbname)
 		paramsfile   = "../%s/em_lbfgs.mdp"  % (params.rundirs.in_dir)
-		tprfile_out  = pdbname+".pr_input.tpr"
-
+		tprfile_out  = pdbname + ".pr_input.tpr"
 
 	return [currdir, topfile, grofile_in, paramsfile, tprfile_out]
 
@@ -44,7 +41,7 @@ def generate(params, stage):
 		return
 	for infile in [topfile, grofile_in, paramsfile]:
 		if not os.path.exists(infile):
-			print "\t in grompp.generate(): %s not found (?)" % (infile)
+			print "\t in grompp.generate(%s): %s not found (?)" % (stage, infile)
 			exit(1)
 
 	program = "grompp"
