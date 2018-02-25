@@ -38,7 +38,7 @@ def parse_commandline():
 class WorkdirStructure:
 
 	workdir_names = ["00_input", "01_topology", "02_em_steepest", "03_em_lbfgs",
-					"04_nvt_eq", "05_mpt_eq", "06_production"]
+					"04_nvt_eq", "05_mpt_eq", "06_production", "07_post-production"]
 
 	def __init__(self, run_options):
 		self.check_workdir_existence(run_options.workdir, self.workdir_names)
@@ -49,6 +49,12 @@ class WorkdirStructure:
 		self.pr1_dir = self.workdir_names[4]
 		self.pr2_dir = self.workdir_names[5]
 		self.production_dir =  self.workdir_names[6]
+		self.post_dir=  self.workdir_names[7]
+
+		self.name = {'water':self.top_dir, 'ions':self.top_dir,
+					'em1':self.em1_dir, 'em2':self.em2_dir,
+					'pr1':self.pr1_dir, 'pr2':self.pr2_dir,
+					'production':self.production_dir}
 		## check run-specific setup requirements
 		wp = run_options.workdir
 		if not run_options.pdb=="none":

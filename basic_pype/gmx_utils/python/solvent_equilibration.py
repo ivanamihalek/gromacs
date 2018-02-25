@@ -3,7 +3,7 @@ import os, subprocess
 from ..python import grompp
 
 #########################################
-def find(params, stage):
+def run(params, stage):
 
 	#grompp = generate parametrized topology file (tpr; binary; complete input compiled)
 	grompp.generate(params, stage) # use the previous step to construct the tpr file
@@ -12,12 +12,18 @@ def find(params, stage):
 	currdir = params.rundirs.name[stage]
 	os.chdir("/".join([params.run_options.workdir, currdir]))
 
+	# apprently there is no other way to pass yhe rertains to mdrun:
+	# (alternatively I could have the *top file ecah time,
+	# it contains the line #include "posre.itp"
+	subprocess.call(["bash", "-c", "ln -sf ../%s/posre.itp posre.itp"%params.rundirs.top_dir],
+					stdout=None, stderr=None)
+
 	pdbname      = params.run_options.pdb
-	tprfile_in   = pdbname+".em_input.tpr"
-	grofile_out  = pdbname+".em_out.gro"
-	traj_out     = pdbname+".em_out.trr"
-	edrfile_out  = pdbname+".em_out.edr"
-	native_log   = pdbname+".em_native.log"
+	tprfile_in   = pdbname+".pr_input.tpr"
+	grofile_out  = pdbname+".pr_out.gro"
+	traj_out     = pdbname+".pr_out.trr"
+	edrfile_out  = pdbname+".pr_out.edr"
+	native_log   = pdbname+".pr_native.log"
 	if os.path.exists(grofile_out):
 		print "\t %s found" % (grofile_out)
 		return
@@ -33,10 +39,14 @@ def find(params, stage):
 					(tprfile_in, grofile_out, traj_out, edrfile_out, native_log)
 
 	params.command_log.write("in %s:\n" % (currdir))
-	params.gmx_engine.run(program, cmdline_args, "looking for the local energy minimum", params.command_log)
+	msg = "solvent equilibration with peptide restrained"
+	params.gmx_engine.run(program, cmdline_args, msg, params.command_log)
+
+	# check for errors
 	false_alarms = ["masses will be determined based on residue and atom names"]
 	params.gmx_engine.check_logs_for_error(program, false_alarms)
 
+	# check convergence
 	print "\t ", params.gmx_engine.convergence_line(program)
 
 	os.remove(traj_out)

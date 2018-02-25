@@ -1,5 +1,5 @@
 ; Run control
-integrator               = sd      
+integrator               = sd
 tinit                    = 0
 dt                       = 0.002 ; 2 fs
 nsteps                   = 500000 ; 1 ns
@@ -25,7 +25,9 @@ rcoulomb                 = 1.0
 ; van der Waals
 vdw-type                 = switch
 rvdw-switch              = 0.8
-rvdw                     = 0.9
+; With Verlet lists rcoulomb!=rvdw is not supported
+; (except for rcoulomb>rvdw with PME electrostatics)
+rvdw                     = 1.0
 
 
 ; Apply long range dispersion corrections for Energy and Pressure
@@ -51,17 +53,17 @@ annealing_temp         =  300   300  360    300  300    ; the goal values of tem
 
 
 ; Pressure coupling is on for NPT
-Pcoupl                   = Parrinello-Rahman 
+Pcoupl                   = Parrinello-Rahman
 tau_p                    = 0.5
 compressibility          = 4.5e-05
-ref_p                    = 1.0 
+ref_p                    = 1.0
 
 ; energy groups for postprocessing
 ;energygrps               = vhd  SOL
 
 
 ; Do not generate velocities
-gen_vel                  = no 
+gen_vel                  = no
 ; options for bonds
 constraints              = all-bonds  ; we only have C-H bonds here
 ; Type of constraint algorithm
@@ -71,4 +73,4 @@ lincs-order              = 4
 
 ; Constrain the starting configuration
 ; since we are continuing from NPT
-continuation             = yes 
+continuation             = yes

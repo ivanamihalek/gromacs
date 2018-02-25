@@ -3,6 +3,8 @@
 from argparse import Namespace
 from gmx_utils.python import run_setup, gro_and_top, box, water
 from gmx_utils.python import counterions, local_energy_minimum
+from gmx_utils.python import solvent_equilibration, production
+from gmx_utils.python import postproduction
 from gmx_utils.python.run_setup  import WorkdirStructure
 from gmx_utils.python.gmx_engine import GmxEngine
 from gmx_utils.python.gmx_params import GmxParameters
@@ -66,18 +68,22 @@ def main():
 	###############
 	# position restrained md    -  NVT
 	###############
+	solvent_equilibration.run(params, 'pr1')
 
 	###############
 	# position restrained md    -  NPT
 	###############
+	solvent_equilibration.run(params, 'pr2')
 
 	###############
 	# ... and finally ... the production run!
 	###############
+	production.run(params)
 
 	###############
-	#  compress the trajectory, strip hydrogens and gzip
+	#  compress the trajectory, strip hydrogens (and gzip)
 	###############
+	postproduction.produce_viewable_trajectory(params)
 
 	params.command_log.close()
 

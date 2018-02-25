@@ -1,8 +1,8 @@
 ; Run control
-integrator               = md     
+integrator               = md
 tinit                    = 0
 dt                       = 0.002
-nsteps                   = 500   
+nsteps                   = 500
 nstcomm                  = 100
 ; Output control
 nstxout                  = 500
@@ -21,10 +21,15 @@ rlist                    = 1.5
 ; Electrostatics
 coulombtype              = PME-switch
 rcoulomb                 = 1.0
+
 ; van der Waals
 vdw-type                 = switch
 rvdw-switch              = 0.8
-rvdw                     = 0.9
+; With Verlet lists rcoulomb!=rvdw is not supported
+; (except for rcoulomb>rvdw with PME electrostatics)
+rvdw                     = 1.0
+
+
 ; Apply long range dispersion corrections for Energy and Pressure
 DispCorr                  = EnerPres
 ; Spacing for the PME/PPPM FFT grid
@@ -40,18 +45,18 @@ tc_grps                  = system
 tau_t                    = 1.0
 ref_t                    = 300
 ; Pressure coupling is on for NPT
-Pcoupl                   = Parrinello-Rahman 
+Pcoupl                   = Parrinello-Rahman
 tau_p                    = 0.5
 compressibility          = 4.5e-05
-ref_p                    = 1.0 
+ref_p                    = 1.0
 
 
 
 nstdhdl                  = 10
 ; Do not generate velocities
-gen_vel                  = no 
+gen_vel                  = no
 ; options for bonds
-constraints              = all-bonds  
+constraints              = all-bonds
 ; Type of constraint algorithm
 constraint-algorithm     = lincs
 lincs_iter               = 2
@@ -59,4 +64,4 @@ lincs-order              = 4
 
 ; Constrain the starting configuration
 ; since we are continuing from NVT
-continuation             = yes 
+continuation             = yes

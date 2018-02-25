@@ -32,7 +32,7 @@ class GmxEngine:
 		return ["%s.log"%program,"%s.err.log"%program]
 
 	###########################
-	def check_logs_for_error(self, program, tolerated_error_msgs):
+	def check_logs_for_error(self, program, tolerated_error_msgs=[]):
 		# it should be in logerr, but I do not trust these kids to be systematic
 		[logname,errlogname] = self.lognames(program)
 		for logf in [logname,errlogname]:
@@ -46,6 +46,10 @@ class GmxEngine:
 					print line
 					exit(3)
 		return
+	###########################
+	def delete_junk(self):
+		# delete gromacs junk
+		subprocess.Popen(["bash", "-c", "rm -f \#*"])
 
 	###########################
 	def run(self, program, cmdline_args, message=None, higher_level_log=None, pipein=None):
@@ -70,14 +74,14 @@ class GmxEngine:
 			failed = True
 		log.close()
 		errlog.close()
-		# delete gromacs junk
-		subprocess.Popen(["bash", "-c", "rm -f \#*"])
+		self.delete_junk()
 		if failed: exit(2)
 		return
 
 	###########################
 	def convergence_line(self, program):
 		[logname,errlogname] = self.lognames(program)
-		cmd  = "(grep converge %s | tail -n1)" % errlogname
-		ret = subprocess.Popen(["bash", "-c", cmd]).communicate()
-		return ret[0]  # the stdout part
+		cmd  = "grep converge %s | tail -n1" % errlogname
+		ret  = subprocess.Popen(["bash", "-c", cmd], stdout=subprocess.PIPE,  stderr=None)
+		return "no convergence line found" if ret==None else ret.communicate()[0].rstrip()
+

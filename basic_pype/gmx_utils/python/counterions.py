@@ -6,7 +6,7 @@ from ..python import grompp
 def add(params):
 
 	# try running the preprocessor, and see if it complains about the charge in the system
-	grompp.generate(params, 'water')
+	grompp.generate(params, 'ions')
 
 	# change to topology directory
 	currdir = params.rundirs.em1_dir
@@ -27,6 +27,8 @@ def add(params):
 	# communicate() returns a tuple (stdoutdata, stderrdata)
 	# and closes the input pype for the subprocess
 	zero_charge = not (ret and len(ret[0])>0 and 'charge' in ret[0])
+
+	#############################################
 	if zero_charge:
 		print "\t the total charge in the system is zero"
 		# our 'ions' file is the same as the 'water' file
@@ -37,6 +39,7 @@ def add(params):
 		subprocess.call(["bash", "-c", cmd])
 		return
 
+	#############################################
 	print "\t there is nonzero charge in the system"
 	pdbname      = params.run_options.pdb
 	topfile      = "../%s/%s.top"%(params.rundirs.top_dir,pdbname)

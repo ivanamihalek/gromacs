@@ -1,26 +1,34 @@
 ; Run control
 integrator               = l-bfgs
 nsteps                   = 1000
+
 ; EM criteria and other stuff
 emtol                    = 100
 emstep                   = 0.01
 niter                    = 20
 nbfgscorr                = 10
+
 ; Output control
 nstlog                   = 1
 nstenergy                = 1
+
 ; Neighborsearching and short-range nonbonded interactions
 nstlist                  = 1
 ns_type                  = grid
 pbc                      = xyz
 rlist                    = 1.0
+
 ; Electrostatics
 coulombtype              = PME
 rcoulomb                 = 1.0
+
 ; van der Waals
+; With Verlet lists rcoulomb!=rvdw is not supported
+: (except for  rcoulomb>rvdw with PME electrostatics)
 vdw-type                 = switch
 rvdw-switch              = 0.8
-rvdw                     = 0.9
+rvdw                     = 1.0
+
 ; Apply long range dispersion corrections for Energy and Pressure
 DispCorr                  = EnerPres
 ; Spacing for the PME/PPPM FFT grid
@@ -35,11 +43,16 @@ tcoupl                   = no
 pcoupl                   = no
 ; Generate velocities to start
 ;
-gen_vel                  = no 
+gen_vel                  = no
+
 ; options for bonds
 ;
-constraints         =  none 
-
+;constraints         =  none
+; Water molecules are constrained via SETTLE, so that causes issues with L-BFGS
+; - the error "The combination of constraints and L-BFGS minimization
+; is not implemented. Either do not use constraints, or use another minimizer
+; (e.g. steepest descent).
+define = -DFLEXIBLE
 
 ; Type of constraint algorithm
 ;
@@ -52,4 +65,3 @@ constraints         =  none
 ; Do not constrain the starting configuration
 ;
 continuation             = no
-

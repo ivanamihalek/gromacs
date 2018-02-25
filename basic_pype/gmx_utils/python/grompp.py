@@ -2,29 +2,47 @@ import os, subprocess
 
 
 #########################################
-def dir_and_files(params, previous_stage):
+def dir_and_files(params, stage):
 
 	[currdir, topfile, grofile_in, paramsfile, tprfile_out] = ['']*5
 	pdbname      = params.run_options.pdb
 	topfile      = "../%s/%s.top"       % (params.rundirs.top_dir, pdbname)
 
-	if previous_stage in ['water', 'ions']:
+	if stage == 'ions':
 		currdir = params.rundirs.em1_dir
-		grofile_in   = "../%s/%s.%s.gro"    % (params.rundirs.top_dir, pdbname, previous_stage)
+		grofile_in   = "../%s/%s.%s.gro"    % (params.rundirs.top_dir, pdbname, 'water')
 		paramsfile   = "../%s/em_steep.mdp" % (params.rundirs.in_dir)
 		tprfile_out  = pdbname + ".em_input.tpr"
 
-	elif previous_stage== 'em1':
+	elif stage== 'em1':
+		currdir = params.rundirs.em1_dir
+		grofile_in   = "../%s/%s.%s.gro"    % (params.rundirs.top_dir, pdbname, 'ions')
+		paramsfile   = "../%s/em_steep.mdp" % (params.rundirs.in_dir)
+		tprfile_out  = pdbname + ".em_input.tpr"
+
+	elif stage== 'em2':
 		currdir = params.rundirs.em2_dir
 		grofile_in   = "../%s/%s.em_out.gro" % (params.rundirs.em1_dir, pdbname)
 		paramsfile   = "../%s/em_lbfgs.mdp"  % (params.rundirs.in_dir)
 		tprfile_out  = pdbname + ".em_input.tpr"
 
-	elif previous_stage== 'em2':
+	elif stage== 'pr1':
 		currdir = params.rundirs.pr1_dir
 		grofile_in   = "../%s/%s.em_out.gro" % (params.rundirs.em2_dir, pdbname)
-		paramsfile   = "../%s/em_lbfgs.mdp"  % (params.rundirs.in_dir)
+		paramsfile   = "../%s/pr_nvt.mdp"  % (params.rundirs.in_dir)
 		tprfile_out  = pdbname + ".pr_input.tpr"
+
+	elif stage== 'pr2':
+		currdir = params.rundirs.pr2_dir
+		grofile_in   = "../%s/%s.pr_out.gro" % (params.rundirs.pr1_dir, pdbname)
+		paramsfile   = "../%s/pr_npt.mdp"  % (params.rundirs.in_dir)
+		tprfile_out  = pdbname + ".pr_input.tpr"
+
+	elif stage== 'production':
+		currdir = params.rundirs.production_dir
+		grofile_in   = "../%s/%s.pr_out.gro" % (params.rundirs.pr2_dir, pdbname)
+		paramsfile   = "../%s/md.mdp"  % (params.rundirs.in_dir)
+		tprfile_out  = pdbname + ".md_input.tpr"
 
 	return [currdir, topfile, grofile_in, paramsfile, tprfile_out]
 
@@ -37,7 +55,8 @@ def generate(params, stage):
 	# change to topology directory
 	os.chdir("/".join([params.run_options.workdir, currdir]))
 	if os.path.exists(tprfile_out):
-		print "\t %s found" % (tprfile_out)
+		print "\t in grompp.generate(%s): %s found" % (stage, tprfile_out)
+		params.gmx_engine.delete_junk()
 		return
 	for infile in [topfile, grofile_in, paramsfile]:
 		if not os.path.exists(infile):
@@ -51,7 +70,8 @@ def generate(params, stage):
 	cmdline_args += "-maxwarn 3 "
 
 	params.command_log.write("in %s:\n"%(currdir))
-	params.gmx_engine.run(program, cmdline_args, "creating parametrization file", params.command_log)
+	msg = "creating parametrization file (%s)" % stage
+	params.gmx_engine.run(program, cmdline_args, msg, params.command_log)
 	false_alarms = []
 	params.gmx_engine.check_logs_for_error(program, false_alarms)
 
