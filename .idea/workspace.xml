@@ -1,21 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="091c317d-ccbb-4472-838b-9c88fb7f00b7" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/postproduction.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/production.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/solvent_equilibration.py" />
+    <list default="true" id="1c23ae2f-ecbf-4a80-b002-0ba1c3932e20" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gromacs.iml" afterPath="$PROJECT_DIR$/.idea/gromacs.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/00_templates/em_lbfgs.mdp" afterPath="$PROJECT_DIR$/basic_pype/00_templates/em_lbfgs.mdp" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/00_templates/md.mdp" afterPath="$PROJECT_DIR$/basic_pype/00_templates/md.mdp" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/00_templates/pr_npt.mdp" afterPath="$PROJECT_DIR$/basic_pype/00_templates/pr_npt.mdp" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/00_templates/pr_nvt.mdp" afterPath="$PROJECT_DIR$/basic_pype/00_templates/pr_nvt.mdp" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/01_gmx_pype.py" afterPath="$PROJECT_DIR$/basic_pype/01_gmx_pype.py" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/gmx_utils/python/local_energy_minimum.py" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/local_energy_minimum.py" />
-      <change beforePath="$PROJECT_DIR$/basic_pype/gmx_utils/python/run_setup.py" afterPath="$PROJECT_DIR$/basic_pype/gmx_utils/python/run_setup.py" />
+      <change beforePath="$PROJECT_DIR$/pype/00_templates/em_lbfgs.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/00_templates/em_steep.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/00_templates/md.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/00_templates/pr_npt.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/00_templates/pr_nvt.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/01_core.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/perl/gro_concat.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/perl/pdb2gro.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/box.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/counterions.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/gmx_engine.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/gmx_params.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/gmx_params_template.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/gro_and_top.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/grompp.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/local_energy_minimum.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/postproduction.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/production.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/run_setup.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/solvent_equilibration.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pype/gmx_utils/python/water.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/acpype.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/confab_cleanup.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/fix_implicit_params.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/gamess_stdout_2_pdb.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/alchemy/em_lbfgs.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/alchemy/em_steep.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/alchemy/md.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/alchemy/pr_npt.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/alchemy/pr_nvt.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/langevin/em_lbfgs.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/langevin/em_steep.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/langevin/md.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/langevin/pr_npt.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/langevin/pr_nvt.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/leapfrog/em.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/leapfrog/md.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/leapfrog/pr.mdp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/ligands" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/temp_distr" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/generic_input/termini" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/gro_concat.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/gromacs.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/hacked_gromacs.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/implicit.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/lie_to_me.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/make_lig_ndx_file.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/make_ndx.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/merge_top_for_alchemy.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/new_conf_acpype.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/old/gromacs.2008.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/old/gromacs.2010.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/old/merge_top_for_alchemy.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/old/old_merge_itp_for_alchemy.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/old/uniq_numbering_merge_itp_for_alchemy.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/pdb2gro.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/raptor/current_raptor.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/raptor/gromacs_pll.Nov2009.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/raptor/gromacs_pll.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/raptor/subscript" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/remd.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/serial_sqmr.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/sloppy_gmx.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/sphere/clean.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/sphere/gromacs.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/sphere/gromacs_pll.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/sphere/subscript" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/00_gromacs_library/v3.x.x/gromacs.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/01_attach_small_group.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/02_run_through_gamess.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/03_acpype.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/04_run_gromacs.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/05_run_gmx_lig_solv.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/06_run_gmx_lig_solv_no_charge.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/07_dG_estimate_using_LIE" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/08_dG_alchemy/01_deploy.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/08_dG_alchemy/02_merge_itps.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/08_dG_alchemy/03_the_alchemist.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/08_dG_alchemy/04_cleanup_dhdl.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/08_dG_alchemy/05_calc_affinity.pl" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/LICENSE" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/smallmol/README.md" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,100 +98,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.34661835">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="01_gmx_pype.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="558">
-                  <caret line="82" column="19" lean-forward="true" selection-start-line="82" selection-start-column="19" selection-end-line="82" selection-end-column="19" />
-                  <folding>
-                    <element signature="e#22#52#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="postproduction.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/postproduction.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="648">
-                  <caret line="36" column="50" lean-forward="false" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="50" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="production.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/production.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="810">
-                  <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="gmx_engine.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-73">
-                  <caret line="34" column="67" lean-forward="false" selection-start-line="34" selection-start-column="67" selection-end-line="34" selection-end-column="67" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="local_energy_minimum.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/local_energy_minimum.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="738">
-                  <caret line="43" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="water.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/water.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="666">
-                  <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="grompp.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="365">
-                  <caret line="58" column="39" lean-forward="true" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>inte</find>
-    </findStrings>
+    <leaf>
+      <file leaf-file-name="gmx02_simple_setup.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gmx02_simple_setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -126,33 +117,20 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/run_setup.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_params_template.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/gro_and_top.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/box.py" />
-        <option value="$PROJECT_DIR$/basic_pype/00_templates/em_steep.mdp" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_params.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/lbfgs.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/water.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/housekeeping.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/run_setup.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/solvent_equilibration.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/local_energy_minimum.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py" />
-        <option value="$PROJECT_DIR$/basic_pype/01_gmx_pype.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/postproduction.py" />
-        <option value="$PROJECT_DIR$/basic_pype/gmx_utils/python/production.py" />
+        <option value="$PROJECT_DIR$/../blahblah/gmx02_simple_setup.py" />
+        <option value="$PROJECT_DIR$/gmx_utils/local_energy_minimum.py" />
+        <option value="$PROJECT_DIR$/gmx_utils/solvent_equilibration.py" />
+        <option value="$PROJECT_DIR$/gmx_utils/counterions.py" />
+        <option value="$PROJECT_DIR$/gmx_utils/production.py" />
+        <option value="$PROJECT_DIR$/gmx02_simple_setup.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2059" />
-    <option name="y" value="28" />
-    <option name="width" value="1717" />
-    <option name="height" value="1017" />
+    <option name="x" value="2276" />
+    <option name="y" value="37" />
+    <option name="width" value="1444" />
+    <option name="height" value="1043" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -169,45 +147,14 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="gromacs" type="b2602c69:ProjectViewProjectNode" />
               <item name="gromacs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gromacs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gromacs" type="462c0819:PsiDirectoryNode" />
-              <item name="basic_pype" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gromacs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gromacs" type="462c0819:PsiDirectoryNode" />
-              <item name="basic_pype" type="462c0819:PsiDirectoryNode" />
-              <item name="00_templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gromacs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gromacs" type="462c0819:PsiDirectoryNode" />
-              <item name="basic_pype" type="462c0819:PsiDirectoryNode" />
-              <item name="gmx_utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gromacs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gromacs" type="462c0819:PsiDirectoryNode" />
-              <item name="basic_pype" type="462c0819:PsiDirectoryNode" />
-              <item name="gmx_utils" type="462c0819:PsiDirectoryNode" />
-              <item name="perl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gromacs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gromacs" type="462c0819:PsiDirectoryNode" />
-              <item name="basic_pype" type="462c0819:PsiDirectoryNode" />
-              <item name="gmx_utils" type="462c0819:PsiDirectoryNode" />
-              <item name="python" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -216,13 +163,16 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/basic_pype/gmx_utils/python" />
-    </key>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="gromacs" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="gromacs" />
+        <option name="myAddSourceRoots" value="true" />
+      </console-settings>
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -244,467 +194,91 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="091c317d-ccbb-4472-838b-9c88fb7f00b7" name="Default" comment="" />
-      <created>1518557035553</created>
+      <changelist id="1c23ae2f-ecbf-4a80-b002-0ba1c3932e20" name="Default" comment="" />
+      <created>1519644252896</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1518557035553</updated>
+      <updated>1519644252896</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2059" y="28" width="1717" height="1017" extended-state="0" />
+    <frame x="2276" y="37" width="1444" height="1043" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14176019" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896176" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329849" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2713568" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329849" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="1" />
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py">
+    <entry file="file://$PROJECT_DIR$/gmx_utils/counterions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/water.py">
+    <entry file="file://$PROJECT_DIR$/gmx_utils/production.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1476">
-          <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1152">
-          <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+        <state relative-caret-position="846">
+          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
-            <element signature="e#22#52#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py">
+    <entry file="file://$PROJECT_DIR$/gmx_utils/solvent_equilibration.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1062">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py" />
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="37" column="79" lean-forward="false" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_params.py">
+    <entry file="file://$PROJECT_DIR$/gmx_utils/local_energy_minimum.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="110" column="32" lean-forward="true" selection-start-line="110" selection-start-column="32" selection-end-line="110" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="44" column="74" lean-forward="false" selection-start-line="44" selection-start-column="74" selection-end-line="44" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="42" lean-forward="false" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="44" column="74" lean-forward="false" selection-start-line="44" selection-start-column="74" selection-end-line="44" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="42" lean-forward="true" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
+    <entry file="file://$PROJECT_DIR$/gmx_utils/postproduction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="43" column="19" lean-forward="true" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gro_and_top.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/box.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/water.py">
+    <entry file="file://$PROJECT_DIR$/gmx02_simple_setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/run_setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="61" column="67" lean-forward="true" selection-start-line="61" selection-start-column="67" selection-end-line="61" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/run_setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
-          <caret line="57" column="34" lean-forward="false" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="13" column="11" lean-forward="true" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding>
-            <element signature="e#22#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/run_setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="33" column="67" lean-forward="false" selection-start-line="33" selection-start-column="67" selection-end-line="33" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/run_setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="42" column="18" lean-forward="true" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/run_setup.py" />
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/box.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_params_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/box.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/00_templates/em_steep.mdp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_params.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gro_and_top.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="954">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/steepest.py" />
-    <entry file="file://$PROJECT_DIR$/basic_pype/00_templates/pr_npt.mdp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/counterions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/run_setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/grompp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="58" column="39" lean-forward="true" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/solvent_equilibration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/gmx_engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-73">
-          <caret line="34" column="67" lean-forward="false" selection-start-line="34" selection-start-column="67" selection-end-line="34" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/01_gmx_pype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="82" column="19" lean-forward="true" selection-start-line="82" selection-start-column="19" selection-end-line="82" selection-end-column="19" />
-          <folding>
-            <element signature="e#22#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/water.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/local_energy_minimum.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="43" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/postproduction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="36" column="50" lean-forward="false" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic_pype/gmx_utils/python/production.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
