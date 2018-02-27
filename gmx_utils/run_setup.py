@@ -31,6 +31,9 @@ def parse_commandline():
 		print "No protein, no small molecule ... what are we doing here?"
 		exit(1)
 
+	# home directory of the gromac pipeline # NOTE THE HARDCODED FILENAME HERE
+	run_options.gromacs_pype_home = "/".join(sys.argv[0].split("/")[:-1])
+	run_options.mdp_template_home = "/".join([run_options.gromacs_pype_home,"gmx00_templates"])
 	return run_options
 
 

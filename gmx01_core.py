@@ -18,19 +18,10 @@ def echo_options(run_options):
 # the core of the pipeline; it assumes that the
 # structure is cleaned up (no gaps or missing residues)
 # and that the itp and gro files for the ligands are provided
+
+
 #########################################
-def core():
-
-	###############
-	# set up the input and the parameters for the run
-	###############
-	params = Namespace()
-	params.run_options  = run_setup.parse_commandline()
-	params.physical     = GmxParameters(params.run_options)
-	params.gmx_engine   = GmxEngine("/usr/local/gromacs/bin/GMXRC.bash")
-	params.rundirs      = WorkdirStructure(params.run_options)
-	params.command_log  = open(params.run_options.workdir+"/commands.log","w")
-
+def core(params):
 	###############
 	# process pdb into gro and topology files
 	###############
@@ -81,11 +72,26 @@ def core():
 	###############
 	postproduction.produce_viewable_trajectory(params)
 
-	params.command_log.close()
 
 	return True
+
+#########################################
+def main():
+
+	###############
+	# set up the input and the parameters for the run
+	###############
+	params = Namespace()
+	params.run_options  = run_setup.parse_commandline()
+	params.physical     = GmxParameters(params.run_options)
+	params.gmx_engine   = GmxEngine("/usr/local/gromacs/bin/GMXRC.bash")
+	params.rundirs      = WorkdirStructure(params.run_options)
+	params.command_log  = open(params.run_options.workdir+"/commands.log","w")
+
+	core(params)
+	params.command_log.close()
 
 
 #########################################
 if __name__ == '__main__':
-	core()
+	main()
