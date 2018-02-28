@@ -3,7 +3,7 @@ import subprocess, os
 #########################################
 class GmxEngine:
 
-	# we rely on everything being accesible from the paths set in GMXRC.bash
+	# we rely on everything being accessible from the paths set in GMXRC.bash
 	# that is, on what is currently the standard way of installing gromacs
 	def __init__(self, gmx_bash):
 		if not os.path.exists(gmx_bash):
