@@ -1,13 +1,13 @@
 #!/usr/bin/python -u
 
 from argparse import Namespace
-from gmx_utils import run_setup, gro_and_top, box, water
-from gmx_utils import counterions, local_energy_minimum
-from gmx_utils import solvent_equilibration, production
-from gmx_utils import postproduction
-from gmx_utils.run_setup  import WorkdirStructure
-from gmx_utils.gmx_engine import GmxEngine
-from gmx_utils.gmx_params import GmxParameters
+from gmx_lib import run_setup, gro_and_top, box, water
+from gmx_lib import counterions, local_energy_minimum
+from gmx_lib import solvent_equilibration, production
+from gmx_lib import postproduction
+from gmx_lib.run_setup  import WorkdirStructure
+from gmx_lib.gmx_engine import GmxEngine
+from gmx_lib.gmx_params import GmxParameters
 
 #########################################
 def echo_options(run_options):

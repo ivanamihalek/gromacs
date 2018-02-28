@@ -5,10 +5,10 @@ import Bio.PDB as biopython
 #from Bio.PDB.PDBParser import PDBParser
 
 from argparse import Namespace
-from gmx_utils import run_setup
-from gmx_utils.run_setup  import WorkdirStructure
-from gmx_utils.gmx_engine import GmxEngine
-from gmx_utils.gmx_params import GmxParameters
+from gmx_lib import run_setup
+from gmx_lib.run_setup  import WorkdirStructure
+from gmx_lib.gmx_engine import GmxEngine
+from gmx_lib.gmx_params import GmxParameters
 
 from gmx01_core import core
 
@@ -41,7 +41,6 @@ def check_pdb(params):
 			# residue id is a triple; [1] is the id assigned by PDB
 			# here can check for the gap in the residue_id sequence (missing residues)
 			print chain.id, residue.get_resname(), residue.id[1], sequential_id
-
 
 			atom_list = biopython.Selection.unfold_entities(residue, 'A')
 			# what should be the number of atoms in each residue
