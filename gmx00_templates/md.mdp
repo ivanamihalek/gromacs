@@ -5,11 +5,11 @@ dt                       = 0.002 ; 2 fs
 nsteps                   = 500000 ; 1 ns
 nstcomm                  = 100
 ; Output control
-nstxout                  = 1000
-nstvout                  = 1000
-nstfout                  = 1000
-nstlog                   = 500
-nstenergy                = 500
+nstxout                  = 10000
+nstvout                  = 10000
+nstfout                  = 10000
+nstlog                   = 5000
+nstenergy                = 5000
 nstxtcout                = 0
 xtc-precision            = 1000
 ; Neighborsearching and short-range nonbonded interactions

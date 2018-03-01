@@ -28,7 +28,8 @@ class  ScwrlEngine:
 		[logname,errlogname] = self.lognames()
 		log    = open(logname, "w")
 		errlog = open(errlogname, "w")
-		cmd    = "%s %s -i %s  -o %s  -s %s" % (self.scwrl_path, in_pdb, out_pdb,  seq_file)
+		# -h suppresses the output of hydrogen atoms
+		cmd    = "%s  -i %s  -o %s  -s %s -h" % (self.scwrl_path, in_pdb, out_pdb,  seq_file)
 		if higher_level_log: higher_level_log.write(cmd+"\n")
 		failed = False
 		try:

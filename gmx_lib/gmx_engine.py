@@ -27,8 +27,8 @@ class GmxEngine:
 
 
 	###########################
-	@staticmethod
-	def lognames(program): # static method does not need 'self'
+	@staticmethod # static method does not need 'self'
+	def lognames(program):
 		return ["%s.log"%program,"%s.err.log"%program]
 
 	###########################
