@@ -4,7 +4,7 @@ import os, subprocess
 
 
 from argparse import Namespace
-from gmx_lib import run_setup
+from gmx_lib  import run_setup
 from gmx_lib.run_setup  import WorkdirStructure
 from gmx_lib.gmx_engine import GmxEngine
 from gmx_lib.gmx_params import GmxParameters

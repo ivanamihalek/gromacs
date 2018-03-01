@@ -83,8 +83,8 @@ class GmxParameters:
 
 		for name in ['pr_nvt', 'pr_npt']:
 			filename = name+".mdp"
-			outf = open ("tmp.mdp","w")
-			inf =  open (filename,"r")
+			outf = open("tmp.mdp","w")
+			inf  = open(filename,"r")
 			number_of_steps = self.to_number_of_steps(eval(name), dt)
 			for line in inf:
 				parameter = line.lstrip()[:6]

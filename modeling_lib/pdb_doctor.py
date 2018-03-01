@@ -56,6 +56,29 @@ def check_pdb_for_missing_atoms(params):
 	return chain_breaks, missing_sidechains
 
 #########################################
+def replace_sidechains(params, positions, original_pdb, chain, new_pdb):
+	# get sequence
+	pdb2seq = "%s/pdb2seq.pl"%params.run_options.perl_utils
+	stdout  = subprocess.Popen([pdb2seq, original_pdb, chain], stdout=subprocess.PIPE)
+	seqlist = list(stdout.communicate()[0].replace("\n","").lower())
+	if type(positions)==list:
+		for pos in positions: seqlist[pos] = seqlist[pos].upper()
+	elif type(positions)==dict:
+		for pos in positions.keys():  seqlist[pos] = positions[pos].upper()
+	else:
+		print "type of 'positions' variable not recognized"
+		exit()
+	seq  = ''.join(seqlist)
+	# write it to a file (uppercase are residues with sidechains requiring fixing)
+	outf = open("chain%s.seq"%chain, "w")
+	outf.write(seq)
+	outf.close()
+	#  here: scwrl run ; scwrl loses the b-factor - not sure whether that could ever matter
+	params.scwrl_engine.run(original_pdb, new_pdb, "chain%s.seq"%chain,
+							message="fixing sidechains", higher_level_log=params.command_log)
+
+
+#########################################
 def fix_sidechains(params, hash_of_residue_positions):
 	# TODO: make sure this actually works for multiple chains
 	currdir = params.rundirs.in_dir
@@ -68,18 +91,6 @@ def fix_sidechains(params, hash_of_residue_positions):
 	os.chdir(pdb_cleanup_dir)
 
 	for chain, positions in hash_of_residue_positions.iteritems():
-		# get sequence
-		pdb2seq = "%s/pdb2seq.pl"%params.run_options.perl_utils
-		stdout  = subprocess.Popen([pdb2seq, "../"+original_pdb, chain], stdout=subprocess.PIPE)
-		seqlist = list(stdout.communicate()[0].replace("\n","").lower())
-		for pos in positions: seqlist[pos] = seqlist[pos].upper()
-		seq  = ''.join(seqlist)
-		# write it to a file (uppercase are residues with sidechains requiring fixing)
-		outf = open("chain%s.seq"%chain, "w")
-		outf.write(seq)
-		outf.close()
-		#  here: scwrl run ; scwrl loses the b-factor - not sure whether that could ever matter
-		params.scwrl_engine.run("../"+original_pdb, "%s.pdb"%pdbname, "chain%s.seq"%chain,
-								 message="fixing sidechains", higher_level_log=params.command_log)
+		replace_sidechains(params, positions,  "../"+original_pdb, chain, "%s.pdb"%pdbname)
 		os.rename("%s.pdb"%pdbname, "../%s.pdb"%pdbname)
 
