@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c23ae2f-ecbf-4a80-b002-0ba1c3932e20" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/gmx03_mutation_scan.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/gmx02_simple_setup.py" afterPath="$PROJECT_DIR$/gmx02_simple_setup.py" />
-      <change beforePath="$PROJECT_DIR$/gmx_lib/gmx_params.py" afterPath="$PROJECT_DIR$/gmx_lib/gmx_params.py" />
-      <change beforePath="$PROJECT_DIR$/gmx_lib/run_setup.py" afterPath="$PROJECT_DIR$/gmx_lib/run_setup.py" />
-      <change beforePath="$PROJECT_DIR$/modeling_lib/pdb_doctor.py" afterPath="$PROJECT_DIR$/modeling_lib/pdb_doctor.py" />
+      <change beforePath="$PROJECT_DIR$/gmx03_mutation_scan.py" afterPath="$PROJECT_DIR$/gmx03_mutation_scan.py" />
+      <change beforePath="$PROJECT_DIR$/gmx_lib/local_energy_minimum.py" afterPath="$PROJECT_DIR$/gmx_lib/local_energy_minimum.py" />
+      <change beforePath="$PROJECT_DIR$/gmx_lib/solvent_equilibration.py" afterPath="$PROJECT_DIR$/gmx_lib/solvent_equilibration.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,13 +16,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="gmx03_mutation_scan.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gmx03_mutation_scan.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gmx03_mutation_scan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="163" column="51" lean-forward="false" selection-start-line="163" selection-start-column="51" selection-end-line="163" selection-end-column="51" />
+            <state relative-caret-position="513">
+              <caret line="168" column="0" lean-forward="false" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
               <folding>
                 <element signature="e#22#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="local_energy_minimum.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gmx_lib/local_energy_minimum.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="693">
+              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="solvent_equilibration.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gmx_lib/solvent_equilibration.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="639">
+              <caret line="51" column="52" lean-forward="true" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,6 +126,8 @@
         <option value="$PROJECT_DIR$/modeling_lib/pdb_doctor.py" />
         <option value="$PROJECT_DIR$/gmx_lib/run_setup.py" />
         <option value="$PROJECT_DIR$/gmx03_mutation_scan.py" />
+        <option value="$PROJECT_DIR$/gmx_lib/solvent_equilibration.py" />
+        <option value="$PROJECT_DIR$/gmx_lib/local_energy_minimum.py" />
       </list>
     </option>
   </component>
@@ -236,20 +260,6 @@
           <folding>
             <element signature="e#22#43#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gmx_lib/solvent_equilibration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gmx_lib/local_energy_minimum.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -400,10 +410,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gmx03_mutation_scan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="163" column="51" lean-forward="false" selection-start-line="163" selection-start-column="51" selection-end-line="163" selection-end-column="51" />
+        <state relative-caret-position="513">
+          <caret line="168" column="0" lean-forward="false" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
           <folding>
             <element signature="e#22#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gmx_lib/local_energy_minimum.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gmx_lib/solvent_equilibration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="639">
+          <caret line="51" column="52" lean-forward="true" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>

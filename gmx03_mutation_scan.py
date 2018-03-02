@@ -164,11 +164,7 @@ def main():
 		pdbname = params.run_options.pdb+"."+newdir
 		cmd = "nice %s -p %s -w %s" % (core_pipe, pdbname, workdir)
 		params.command_log.write(cmd+"\n")
-		print cmd
 		subprocess.Popen( ["bash", "-c", cmd], stdout=None, stderr=None,  close_fds=True)
-
-
-
 
 	######################
 	# cleanup and exit

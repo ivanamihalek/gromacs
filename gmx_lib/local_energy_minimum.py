@@ -39,7 +39,6 @@ def find(params, stage):
 
 	print "\t ", params.gmx_engine.convergence_line(program)
 
-	os.remove(traj_out)
-	os.remove(edrfile_out)
-
+	if os.path.exists(traj_out): os.remove(traj_out)
+	if os.path.exists(edrfile_out): os.remove(edrfile_out)
 
