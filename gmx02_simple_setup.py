@@ -43,6 +43,7 @@ def main():
 
 	make_directories(params)
 	fill_input_dir  (params)
+
 	params.rundirs      = WorkdirStructure(params.run_options)
 	params.command_log  = open(params.run_options.workdir+"/commands.log","w")
 
@@ -58,11 +59,11 @@ def main():
 	# adjust the run length
 	######################
 	# the frequency of output adjusted to 100 frames, no matter what the length of simulation
-	params.physical.set_run_lengths(params, em_steep=10000, em_lbfgs=1000,
-											pr_nvt="10ps", pr_npt="10ps", md="20ps")
+	params.physical.set_run_lengths(params,  em_steep=10000, em_lbfgs=100,
+											pr_nvt="50ps", pr_npt="10ps", md="100ns")
 
 	######################
-	# check pdb file for missing residues and side chains
+	# the MD simulation sequence
 	######################
 	core(params)
 

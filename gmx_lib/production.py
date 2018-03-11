@@ -1,4 +1,12 @@
+#!/usr/bin/python -u
 import os, subprocess
+
+from argparse import Namespace
+import run_setup
+from run_setup  import WorkdirStructure
+from gmx_engine import GmxEngine
+from gmx_params import GmxParameters
+
 
 import grompp
 
@@ -45,3 +53,24 @@ def run(params):
 	# if we safely got to here, we'll assume that we do not need the checkpoint files
 	# (the error checks exit with non-zero code, and thus the cpt files will stay)
 	subprocess.call(["bash","-c","rm -f *.cpt"])
+
+#########################################
+def main():
+	###############
+	# set up the input and the parameters for the run
+	###############
+	params = Namespace()
+	params.run_options  = run_setup.parse_commandline()
+	params.physical     = GmxParameters(params.run_options)
+	params.gmx_engine   = GmxEngine("/usr/local/gromacs/bin/GMXRC.bash")
+	params.rundirs      = WorkdirStructure(params.run_options)
+	params.command_log  = open(params.run_options.workdir+"/commands.log","w")
+
+	run(params)
+	params.command_log.close()
+
+
+
+#########################################
+if __name__ == '__main__':
+	main()

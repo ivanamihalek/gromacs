@@ -122,7 +122,7 @@ def main():
 	######################
 	# adjust the run length
 	params.physical.set_run_lengths(params, em_steep=10000, em_lbfgs=100,
-											pr_nvt="10ps", pr_npt="10ps", md="20ps")
+											pr_nvt="50ps", pr_npt="10ps", md="100ns")
 
 	######################
 	# read in the mutation list
@@ -176,4 +176,3 @@ def main():
 #########################################
 if __name__ == '__main__':
 	main()
-

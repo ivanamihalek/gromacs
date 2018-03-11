@@ -91,7 +91,7 @@ class GmxParameters:
 				if parameter[:2]=="dt":
 					outf.write("dt   =  %5.3f ; %d fs \n"  % (self.timestep_in_fs*1.e-3, self.timestep_in_fs))
 				elif parameter=="nsteps":
-					outf.write("nsteps   =  %d \n"  % number_of_steps)
+					outf.write("nsteps   =  %d ; %s \n"  % (number_of_steps, eval(name)))
 				elif parameter in ["nstxou", "nstvou", "nstfou"]:
 					# write coords and velocities only in the last step
 					outf.write("%st =  %d \n" % (parameter,number_of_steps))
@@ -104,6 +104,7 @@ class GmxParameters:
 			inf.close()
 			outf.close()
 			os.rename("tmp.mdp", filename)
+
 		for name in ['md']:
 			filename = name+".mdp"
 			outf = open ("tmp.mdp","w")
@@ -114,13 +115,13 @@ class GmxParameters:
 				if parameter[:2]=="dt":
 					outf.write("dt   =  %5.3f ; %d fs \n"  % (self.timestep_in_fs*1.e-3, self.timestep_in_fs))
 				elif parameter=="nsteps":
-					outf.write("nsteps   =  %d \n"  % number_of_steps)
+					outf.write("nsteps   =  %d ; %s \n"  % (number_of_steps, eval(name)))
 				elif parameter in ["nstxou", "nstvou", "nstfou"]:
 					outf.write("%st   =  %d \n" % (parameter,number_of_steps/100))
 				elif parameter == "nstlog":
-					outf.write("nstlog    =  %d \n" % (number_of_steps/10))
+					outf.write("nstlog    =  %d \n" % (number_of_steps/1000))
 				elif parameter == "nstene":
-					outf.write("nstenergy =  %d \n" % (number_of_steps/10))
+					outf.write("nstenergy =  %d \n" % (number_of_steps/1000))
 				else:
 					outf.write(line)
 			inf.close()
