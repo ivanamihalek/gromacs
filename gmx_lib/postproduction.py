@@ -8,11 +8,7 @@ from gmx_engine import GmxEngine
 from gmx_params import GmxParameters
 
 #########################################
-def produce_viewable_trajectory(params):
-
-	# change to production directory
-	currdir = params.rundirs.post_dir
-	os.chdir("/".join([params.run_options.workdir, currdir]))
+def make_xtc(params):
 
 	pdbname     = params.run_options.pdb
 	xtc_file    = pdbname + ".md.xtc"
@@ -27,13 +23,17 @@ def produce_viewable_trajectory(params):
 	# xtc, a compressed version of trajectory
 	program = "trjconv"
 	cmdline_args  = "-pbc nojump -f %s -o %s " % (trrfile_in, xtc_file)
-	params.command_log.write("in %s:\n"%(currdir))
+	params.command_log.write("in %s:\n"%(params.rundirs.post_dir))
 	params.gmx_engine.run(program, cmdline_args, "creating xtc file", params.command_log)
 	params.gmx_engine.check_logs_for_error(program)
 
-	#########################
-	# pdb file
+#########################################
+def make_pdb(params):
+
 	program = "trjconv"
+	pdbname     = params.run_options.pdb
+	xtc_file    = pdbname + ".md.xtc"
+	tprfile_in  = "../%s/%s.md_input.tpr"%(params.rundirs.production_dir, pdbname)
 	cmdline_args  = "-s %s -f %s -fit progressive -o %s.trj.pdb " % (tprfile_in, xtc_file, pdbname)
 	# pipe in the group to fit on and to output (2 = Protein - Hydrogen in both cases)
 	outf = open("trjconv.pipein", "w");  outf.write("2\n2\n"); outf.close()
@@ -41,16 +41,32 @@ def produce_viewable_trajectory(params):
 	params.gmx_engine.check_logs_for_error(program)
 
 
-	#########################
+#########################################
+def count_hbonds(params):
+
 	# number of hydrogen bonds within the protein
 	program = "hbond"
+	pdbname     = params.run_options.pdb
+	xtc_file    = pdbname + ".md.xtc"
+	tprfile_in  = "../%s/%s.md_input.tpr"%(params.rundirs.production_dir, pdbname)
 	cmdline_args  = "-s %s -f %s  -xvg none -num %s.hbonds " % (tprfile_in, xtc_file, pdbname)
 	outf = open("hbonds.pipein", "w");  outf.write("1\n1\n"); outf.close()
 	params.gmx_engine.run(program, cmdline_args, "counting hbonds", params.command_log, pipein="cat  hbonds.pipein")
 	params.gmx_engine.check_logs_for_error(program)
 
+def cleanup(params):
 	#########################
 	subprocess.Popen(["bash", "-c", "rm -f \#* *.pipein"])
+	return
+
+#########################################
+def produce_viewable_trajectory(params):
+	# change to production directory
+	os.chdir("/".join([params.run_options.workdir, params.rundirs.post_dir]))
+
+	make_xtc(params)
+	make_pdb(params)
+	cleanup(params)
 	return
 
 
@@ -64,9 +80,16 @@ def main():
 	params.physical     = GmxParameters(params.run_options)
 	params.gmx_engine   = GmxEngine("/usr/local/gromacs/bin/GMXRC.bash")
 	params.rundirs      = WorkdirStructure(params.run_options)
-	params.command_log  = open(params.run_options.workdir+"/commands.log","w")
+	params.command_log  = open(params.run_options.workdir+"/postproc_commands.log","w")
 
-	produce_viewable_trajectory(params)
+	# change to production directory
+	currdir = params.rundirs.post_dir
+	os.chdir("/".join([params.run_options.workdir, currdir]))
+
+	make_xtc(params)
+	make_pdb(params)
+	count_hbonds(params)
+	cleanup(params)
 	params.command_log.close()
 
 

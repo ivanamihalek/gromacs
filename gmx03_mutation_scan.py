@@ -12,14 +12,11 @@ from modeling_lib.scwrl_engine import ScwrlEngine
 from modeling_lib.pdb_doctor import get_biopython_structure, replace_sidechains
 from modeling_lib.pdb_doctor import check_pdb_for_missing_atoms, fix_sidechains
 
-from gmx01_core import core
 
 #########################################
 def read_mutations(params):
-	os.chdir(params.run_options.workdir)
-	if (params.run_options.xtra == "none"):
-		print "this pipe expects xtra file: list of mutations"
-		exit()
+
+	os.chdir("/".join([params.run_options.workdir,params.rundirs.in_dir]))
 	mutfile = open(params.run_options.xtra, "r")
 	mutation = {}
 	for line in mutfile:
@@ -45,6 +42,10 @@ def fill_in_dir(params):
 	os.chdir(params.run_options.workdir)
 	in_dir = params.rundirs.in_dir
 	if not os.path.exists(in_dir): os.mkdir(in_dir)
+
+	# move the list of mutations to super-input directory
+	os.rename(params.run_options.xtra, "/".join([in_dir, params.run_options.xtra]))
+
 	os.chdir(in_dir)
 	pdbname = params.run_options.pdb
 	if os.path.exists("../%s.pdb"%pdbname): os.rename("../%s.pdb"%pdbname,"./%s.pdb"%pdbname)
@@ -52,6 +53,7 @@ def fill_in_dir(params):
 		print "%s.pdb  not found"%pdbname
 		exit()
 	subprocess.call(["bash", "-c", "cp -f %s/* . " % (params.run_options.mdp_template_home)])
+
 
 #########################################
 def remove_nonexistent_positions(params, mutations):
@@ -71,6 +73,7 @@ def remove_nonexistent_positions(params, mutations):
 		exit()
 	return
 
+
 #########################################
 def res_id_to_seq_id(params):
 	structure = get_biopython_structure(params)
@@ -82,6 +85,7 @@ def res_id_to_seq_id(params):
 			seq_id[int(residue.id[1])] = seq_no
 			seq_no += 1
 		return seq_id
+
 
 #########################################
 def make_mutant(params,newdir, seq_id, new_aa):
@@ -95,6 +99,7 @@ def make_mutant(params,newdir, seq_id, new_aa):
 	# this function will call scwrl
 	replace_sidechains(params, {seq_id: new_aa}, original_pdb, '', new_pdb)
 
+
 # mutational scan: simple run for each mutated structure
 #########################################
 def main():
@@ -105,6 +110,12 @@ def main():
 	params.gmx_engine   = GmxEngine("/usr/local/gromacs/bin/GMXRC.bash")
 	params.scwrl_engine = ScwrlEngine("/usr/local/bin/scwrl4/Scwrl4")
 	params.command_log  = open(params.run_options.workdir+"/commands.log","w")
+
+	######################
+	# special requirement for mutation scan:
+	if (params.run_options.xtra == "none"):
+		print "this pipe expects xtra file: list of mutations"
+		exit()
 
 	######################
 	# create a super-input dir with fixed pdb and mdp files
@@ -157,7 +168,7 @@ def main():
 		subprocess.call(["bash", "-c", "rm -f chain*seq scwrl*"], stdout=None, stderr=None)
 
 	######################
-	#
+	# start the simulation in each sub-dir
 	for newdir in newdirs:
 		workdir = "/".join([params.run_options.workdir, newdir])
 		core_pipe = "/".join([params.run_options.gromacs_pype_home,"gmx01_core.py"])
