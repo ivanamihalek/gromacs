@@ -13,7 +13,7 @@ from gmx_lib.gmx_engine import GmxEngine
 #########################################
 def main():
 
-	graph_only = False
+	graph_only = True
 
 	params = Namespace()
 	params.run_options  = run_setup.parse_commandline()
@@ -68,22 +68,36 @@ def main():
 		xvg_file = params.run_options.pdb+"."+subdir+".hbonds.xvg"
 		with open("/".join([subdir,"07_post-production", xvg_file])) as f:
 			lines = f.readlines()
-			# col 1 are hydrogen bonds, and col 2 are apirs within 0.35nm
+			# col 1 are hydrogen bonds, and col 2 are appears within 0.35nm
 			# col 0 is time in ps
 			x = [int(line.split()[0])/1000 for line in lines]
-			y = [(float(int(line.split()[1])) + 2*random.uniform(0, 1)-1) for line in lines]
+			y1 = [(float(int(line.split()[1]))) for line in lines]
+			y1 = [yi/y1[0] for yi in y1]
+			y2 = [(float(int(line.split()[2]))) for line in lines]
+			y2 = [yi/y2[0] for yi in y2]
 			hue += hue_step
 			markerfacecolor = colorsys.hsv_to_rgb(hue/360.0, 1.0, 1.0)
-			linecolor = colorsys.hsv_to_rgb(random.uniform(0, 1), 1.0, 1.0)
-			markeredgecolor  = colorsys.hsv_to_rgb(random.uniform(0, 1), 1.0, 1.0)
-			plt.plot(x,y, marker='o',
-			         markerfacecolor= markerfacecolor,
-			         markeredgecolor= markeredgecolor,
-			         linestyle = '-', color=linecolor,
-			         label=subdir)
-	plt.legend()
-	plt.ylim(115, 160)
-	plt.xlim(-1,8)
+			linecolor       = colorsys.hsv_to_rgb((3*hue)%240/360.0, 1.0, 1.0)
+			markeredgecolor = colorsys.hsv_to_rgb(random.uniform(0, 1), 1.0, 1.0)
+			if False:
+				plt.title("Fraction of H-bonds")
+				values = y1
+				plt.ylim(0.8, 1.2)
+			else:
+				plt.title("Fraction of acceptor/donor pairs within 3.5A")
+				values = y2
+				plt.ylim(0.9, 1.1)
+
+			plt.xlabel("Time (ns)")
+
+			plt.plot(x,values, marker='o',
+				markerfacecolor= markerfacecolor,
+				markeredgecolor= markerfacecolor,
+				linestyle = '-', color=linecolor,
+				label=subdir)
+
+	plt.legend(loc='upper left')
+	plt.xlim(-2,10)
 	plt.show()
 
 
