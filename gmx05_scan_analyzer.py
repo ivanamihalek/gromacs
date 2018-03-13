@@ -64,6 +64,8 @@ def main():
 	# see https://en.wikipedia.org/wiki/Hue
 	hue_step = 240.0/len(subdirs);
 	hue = 0
+	marker = ["o", "^", "s", "h", "D", "X"]
+	m = 0
 	for subdir in subdirs:
 		xvg_file = params.run_options.pdb+"."+subdir+".hbonds.xvg"
 		with open("/".join([subdir,"07_post-production", xvg_file])) as f:
@@ -90,11 +92,12 @@ def main():
 
 			plt.xlabel("Time (ns)")
 
-			plt.plot(x,values, marker='o',
+			plt.plot(x,values, marker=marker[m],
 				markerfacecolor= markerfacecolor,
-				markeredgecolor= markerfacecolor,
+				markeredgecolor= 'black',
 				linestyle = '-', color=linecolor,
 				label=subdir)
+			m = m+1 if m+1<len(marker) else 0
 
 	plt.legend(loc='upper left')
 	plt.xlim(-2,10)
