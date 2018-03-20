@@ -35,7 +35,7 @@ def run(params, stage):
 	program = "mdrun" # nt 1; run multiple trajectories instead
 	# mdrun will produce trajectory and edr (energy) files,  whether we ask for it or not,
 	# so we might just as well name them so we can remove them later
-	cmdline_args  = " -s %s -c %s -nt 1 -o %s -e %s -g %s" % \
+	cmdline_args  = " -s %s -c %s -nt 4 -o %s -e %s -g %s" % \
 					(tprfile_in, grofile_out, traj_out, edrfile_out, native_log)
 
 	params.command_log.write("in %s:\n" % (currdir))

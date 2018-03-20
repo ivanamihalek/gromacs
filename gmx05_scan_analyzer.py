@@ -13,7 +13,7 @@ from gmx_lib.gmx_engine import GmxEngine
 #########################################
 def main():
 
-	graph_only = True
+	graph_only = False
 
 	params = Namespace()
 	params.run_options  = run_setup.parse_commandline()
@@ -31,8 +31,8 @@ def main():
 		if len(field)!=3: continue
 		subdir_path = "/".join([params.run_options.workdir, subdir])
 		os.chdir(subdir_path)
-		cmd = "ls 06_production"
-		proc = subprocess.Popen(["bash", "-c", cmd], stdout=subprocess.PIPE)
+		cmd     = "ls 06_production"
+		proc    = subprocess.Popen(["bash", "-c", cmd], stdout=subprocess.PIPE)
 		trjfile = None
 		for line in proc.stdout.readlines():
 			if "md_out.trr" in line:
@@ -100,7 +100,7 @@ def main():
 			m = m+1 if m+1<len(marker) else 0
 
 	plt.legend(loc='upper left')
-	plt.xlim(-2,10)
+	plt.xlim(-2,14)
 	plt.show()
 
 

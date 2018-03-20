@@ -39,7 +39,6 @@ def main():
 	params.run_options  = run_setup.parse_commandline()
 	params.physical     = GmxParameters(params.run_options)
 	params.gmx_engine   = GmxEngine("/usr/local/gromacs/bin/GMXRC.bash")
-	params.scwrl_engine = ScwrlEngine("/usr/local/bin/scwrl4/Scwrl4")
 
 	make_directories(params)
 	fill_input_dir  (params)
@@ -48,25 +47,20 @@ def main():
 	params.command_log  = open(params.run_options.workdir+"/commands.log","w")
 
 	######################
-	# check pdb file for missing residues and sidechains
+	# note: pdb is not checked for missing residues and sidechains
 	######################
-	chain_breaks, missing_sidechains = check_pdb_for_missing_atoms(params)
-	if missing_sidechains: fix_sidechains(params, missing_sidechains)
-	#  TODO: fix chain breaks (if they exist)
-	# if chain_breaks: fix_chain_breaks(params, missing_sidechains)
 
 	######################
 	# adjust the run length
 	######################
 	# the frequency of output adjusted to 100 frames, no matter what the length of simulation
 	params.physical.set_run_lengths(params,  em_steep=12000, em_lbfgs=100,
-											pr_nvt="50ps", pr_npt="10ps", md="1000ps")
+											pr_nvt="50ps", pr_npt="10ps", md="2000ps")
 
 	if True: params.physical.set_annealing_schedule(params, annealing_type='single',
 								annealing_npoints='8',
 								annealing_time= "0    100  200 300 400 500 600 700",
 								annealing_temp= "300  320  340 360 380 400 420 440")
-
 
 	######################
 	# the MD simulation sequence

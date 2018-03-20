@@ -4,7 +4,8 @@ import os
 class GmxParameters:
 
 	def __init__(self, run_options):  # maybe one day I can have some parameters passed for the most typical runs
-		self.forcefield  = "amber99sb" # for simulations involving ligands
+		#self.forcefield  = "amber99sb" # for simulations involving ligands
+		self.forcefield  = "amber14sb" # for simulations involving RNA, perhaps also ligands
 		# self.forcefield = "oplsaa"
 		# self.forcefield = "gmx"
 		self.water = "tip3p"
@@ -15,7 +16,7 @@ class GmxParameters:
 		self.pos_ion     = "Na"
 		self.genion_solvent_code = "12"
 
-		if self.forcefield=="oplsaa" or self.forcefield=="amber99sb":
+		if self.forcefield=="oplsaa" or "amber" in self.forcefield:
 			self.neg_ion  = "CL"
 			self.pos_ion  = "NA"
 
@@ -63,8 +64,8 @@ class GmxParameters:
 		return number_of_steps
 
 	#################################
-	def set_run_lengths(self, params, em_steep=100, em_lbfgs=100, pr_nvt=100, pr_npt=100, md=100):
-		os.chdir("/".join([params.run_options.workdir, params.rundirs.in_dir]))
+	def set_run_lengths(self, run_params, em_steep=100, em_lbfgs=100, pr_nvt=100, pr_npt=100, md=100):
+		os.chdir("/".join([run_params.run_options.workdir, run_params.rundirs.in_dir]))
 		dt = self.timestep_in_fs
 		for name in ['em_steep', 'em_lbfgs']:
 			filename = name+".mdp"
@@ -128,4 +129,35 @@ class GmxParameters:
 			outf.close()
 			os.rename("tmp.mdp", filename)
 
+		return
+
+
+	#################################
+	# annealing_type: cycle through annealing thing with 'periodic' (alt: 'single')
+	# annealing-npoints: A list with the number of annealing reference/control points used for each temperature group.
+	#     Use 0 for groups that are not annealed. The number of entries should equal the number of temperature groups.
+	# annealing-time: List of times at the annealing reference/control points for each group (ps
+	# annealing-temp: List of temperatures at the annealing reference/control points for each group.
+
+	def set_annealing_schedule(self, run_params,
+								annealing_type='periodic',
+								annealing_npoints='5',
+								annealing_time= "0     5    7.5     10     15   20",
+								annealing_temp= "300   320   340    360   340   320"):
+
+		os.chdir("/".join([run_params.run_options.workdir, run_params.rundirs.in_dir]))
+		filename = "md.mdp"
+		outf = open ("tmp.mdp","w")
+		inf =  open (filename,"r")
+		for line in inf:
+			if 'anneal' in line: continue
+			outf.write(line)
+		inf.close()
+		outf.write("\n")
+		outf.write("annealing  = %s\n" % annealing_type)
+		outf.write("annealing_npoints = %s\n" % annealing_npoints)
+		outf.write("annealing_time = %s\n" % annealing_time)
+		outf.write("annealing_temp = %s\n" % annealing_temp)
+		outf.close()
+		os.rename("tmp.mdp", filename)
 		return

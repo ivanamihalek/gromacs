@@ -50,10 +50,6 @@ tc_grps                  = system
 tau_t                    = 1.0
 ref_t                    = 300
 
-;annealing              =    periodic    ; cycle through annealing thing
-;annealing_npoints      =      5         ; number of time/temperature points in an anneal round
-;annealing_time         =   0     5    7.5     10   15     ; the times (in ps) in which the target temps should be reached
-;annealing_temp         =  300   300   360    300  300    ; the goal values of temperature
 
 
 ; Pressure coupling is on for NPT

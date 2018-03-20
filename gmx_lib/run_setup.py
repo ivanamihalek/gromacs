@@ -6,13 +6,15 @@ def parse_commandline():
 	if len(sys.argv)<=1:
 		print "Usage:"
 		print "%s -h" % sys.argv[0]
-		print "or"
-		print "%s -p <pdb_root> [-l <ligand list>] [-w <workdir>] [--remd] [--min] [--posres]" % sys.argv[0]
+		print "for the full list of command line options, or"
+		print "%s -p <pdb_root> [-l <ligand list>] [-w <workdir>] " % sys.argv[0]
 		exit(1)
 	pwd = os.getcwd()
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-p','--pdb', metavar='pdbfile', type=str,  default="none",
 						dest="pdb", help='input pdb file (peptide, ions, and ligands)')
+	parser.add_argument('-c','--chain', metavar='chain', type=str,  default="none",
+						dest="chain", help='chain of special interest (if there are multiple)')
 	parser.add_argument('-l','--ligands', metavar='ligand', type=str, nargs='+', default=[],
 						dest="ligands", help='list of ligand names')
 	parser.add_argument('-w','--workdir', metavar='workdir', type=str, default=pwd,
@@ -33,6 +35,11 @@ def parse_commandline():
 	if run_options.pdb=="none" and run_options.ligands.length()==0:
 		print "No protein, no small molecule ... what are we doing here?"
 		exit(1)
+	if run_options.xtra!=None and run_options.xtra!="none":
+		xtrapath = "/".join([run_options.workdir,run_options.xtra])
+		if  not os.path.exists(xtrapath):
+			print xtrapath, "not found"
+			exit(1)
 
 	# home directory of the gromacs pipeline # NOTE THE HARDCODED FILENAME HERE
 	run_options.gromacs_pype_home = "/".join(sys.argv[0].split("/")[:-1])

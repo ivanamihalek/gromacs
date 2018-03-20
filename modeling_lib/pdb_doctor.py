@@ -55,11 +55,13 @@ def check_pdb_for_missing_atoms(params):
 			sequential_id += 1
 	return chain_breaks, missing_sidechains
 
+
 #########################################
-def replace_sidechains(params, positions, original_pdb, chain, new_pdb):
+def make_scwrl_input_sequence(params, positions, original_pdb, chain):
 	# get sequence
 	pdb2seq = "%s/pdb2seq.pl"%params.run_options.perl_utils
 	stdout  = subprocess.Popen([pdb2seq, original_pdb, chain], stdout=subprocess.PIPE)
+	# lowercase positions that stay the same, uppercase for those that change
 	seqlist = list(stdout.communicate()[0].replace("\n","").lower())
 	if type(positions)==list:
 		for pos in positions: seqlist[pos] = seqlist[pos].upper()
@@ -70,13 +72,35 @@ def replace_sidechains(params, positions, original_pdb, chain, new_pdb):
 		exit()
 	seq  = ''.join(seqlist)
 	# write it to a file (uppercase are residues with sidechains requiring fixing)
-	outf = open("chain%s.seq"%chain, "w")
+	scwrl_input_seq_name = "chain%s.seq"%chain
+	outf = open(scwrl_input_seq_name, "w")
 	outf.write(seq)
 	outf.close()
-	#  here: scwrl run ; scwrl loses the b-factor - not sure whether that could ever matter
-	params.scwrl_engine.run(original_pdb, new_pdb, "chain%s.seq"%chain,
-							message="fixing sidechains", higher_level_log=params.command_log)
+	return scwrl_input_seq_name
 
+
+#########################################
+def replace_sidechains(params, positions, original_pdb, chain, new_pdb):
+	# split the input file into one that contains the chain, and the other one
+	# that contains the rest of the structure
+	pdb_extract = "%s/pdb_extract_chain.pl"%params.run_options.perl_utils
+	tmp_chain_pdb    = "chain%s.pdb" % chain
+	tmp_notchain_pdb = "not_chain%s.pdb" % chain
+	subprocess.call([pdb_extract, original_pdb, "-c%s"%chain, "-o%s"%tmp_chain_pdb], stdout=None, stderr=None)
+	subprocess.call([pdb_extract, original_pdb, "-c%s"%chain, "-o%s"%tmp_notchain_pdb, "-i"], stdout=None, stderr=None)
+
+	# get the input file indicating which positions need to be mutated
+	scwrl_input_seq_name = make_scwrl_input_sequence(params, positions, tmp_chain_pdb, chain)
+	# here: scwrl run
+	mutated_chain_pdb = "mutated_chain%s.pdb" % chain
+	params.scwrl_engine.run(tmp_chain_pdb, mutated_chain_pdb, scwrl_input_seq_name,
+							message="fixing sidechains", higher_level_log=params.command_log)
+	# concatenate mutated peptide and the rest of the pdb into new file
+	command = ['bash', '-c', "cat %s %s > %s" % (mutated_chain_pdb, tmp_notchain_pdb, new_pdb)]
+	subprocess.call(command, stdout=None, stderr=None)
+	# cleanup
+	command = ['bash', '-c', "rm %s %s %s" % (mutated_chain_pdb, tmp_notchain_pdb, tmp_chain_pdb)]
+	subprocess.call(command, stdout=None, stderr=None)
 
 #########################################
 def fix_sidechains(params, hash_of_residue_positions):
