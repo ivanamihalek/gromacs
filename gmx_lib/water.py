@@ -20,8 +20,8 @@ def add(params):
 			print "\t in water.add(): %s not found (?)" % (infile)
 			exit(1)
 
-	# earlier program  genbox was split itno solvate and insert-molecules
-	# the latter inserts -nmol copies of the system specified in the -ci input file - I guess I don'e need this
+	# earlier program  genbox was split into solvate and insert-molecules
+	# the latter inserts -nmol copies of the system specified in the -ci input file - I guess I don't need this
 	# (perhaps for lipid generation in the simulation of a membrane bound system?)
 
 	# a layer of water can be added - should this be tried?

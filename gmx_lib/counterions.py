@@ -106,7 +106,7 @@ Select a group:"
 at which point we are supposed to type in 12 for water.
 This number may change according to the content of tpr,
 which is a binary. The following function is a hack to get the number
-by feeding  genion some dummy input.Rather than parsing some 
+by feeding  genion some dummy input. Rather than parsing some 
 other file, this way I know exactly what is genion going to ask.'
 '''
 def hack_water_group_number_out_of_genion(params, tprfile):

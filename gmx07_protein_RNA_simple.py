@@ -58,9 +58,9 @@ def main():
 											pr_nvt="50ps", pr_npt="10ps", md="2000ps")
 
 	if True: params.physical.set_annealing_schedule(params, annealing_type='single',
-								annealing_npoints='8',
-								annealing_time= "0    100  200 300 400 500 600 700",
-								annealing_temp= "300  320  340 360 380 400 420 440")
+								annealing_npoints='13',
+								annealing_time= "0    100  200 300 400 500 600 700 800 900 1000 1020 1040",
+								annealing_temp= "300  320  340 360 380 400 420 400 380 360  340  320  300")
 
 	######################
 	# the MD simulation sequence

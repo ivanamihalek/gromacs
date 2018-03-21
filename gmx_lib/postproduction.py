@@ -28,18 +28,60 @@ def make_xtc(params):
 	params.gmx_engine.check_logs_for_error(program)
 
 #########################################
+# see counterions.py to see explanation for the similar case of genion
+def hack_group_numbers_out_of_trjconv(params, tprfile_in, xtc_file):
+	protein_group_number = ""
+	non_water_group_number = ""
+
+	program = "trjconv"
+	cmdline_args  = "-s %s -f %s -fit progressive -o grouphack " % (tprfile_in, xtc_file)
+	params.gmx_engine.run(program, cmdline_args, pipein="echo 1")
+	[logfile, errlogfile]  = params.gmx_engine.lognames(program)
+	infile = open(errlogfile,"r")
+	for line in infile:
+		field = line.split()
+		if len(field)<4: continue
+		if field[0]=='Group':
+			if  field[3]=='Protein-H)':
+				protein_group_number = field[1]
+			elif field[3]=='non-Water)':
+				non_water_group_number = field[1]
+	infile.close()
+	for group_number in ["protein_group_number","non_water_group_number"]:
+		if eval(group_number) == "":
+			print group_number, "not found in %s" % errlogfile
+			exit(1)
+	subprocess.call(["bash", "-c", "rm -f %s %s grouphack.xtc"%(logfile, errlogfile)])
+	return [protein_group_number, non_water_group_number]
+
+#########################################
 def make_pdb(params):
 
 	program = "trjconv"
 	pdbname     = params.run_options.pdb
 	xtc_file    = pdbname + ".md.xtc"
 	tprfile_in  = "../%s/%s.md_input.tpr"%(params.rundirs.production_dir, pdbname)
-	cmdline_args  = "-s %s -f %s -fit progressive -o %s.trj.pdb " % (tprfile_in, xtc_file, pdbname)
-	# pipe in the group to fit on and to output (2 = Protein - Hydrogen in both cases)
-	outf = open("trjconv.pipein", "w");  outf.write("2\n2\n"); outf.close()
+
+	# not sure how the group numbers are assigned, so hack them out
+	[protein_group_number, non_water_group_number] = hack_group_numbers_out_of_trjconv(params, tprfile_in, xtc_file)
+	# pipe in the groups to fit on and to output
+	outf = open("trjconv.pipein", "w");  outf.write("%s\n%s\n"%(protein_group_number, non_water_group_number)); outf.close()
+
+	pdb_w_hydrogens = "%s.trj.wH.pdb"%pdbname
+	cmdline_args  = "-s %s -f %s -fit progressive -o %s" % (tprfile_in, xtc_file, pdb_w_hydrogens)
 	params.gmx_engine.run(program, cmdline_args, "producing pdb file", params.command_log, pipein="cat  trjconv.pipein")
 	params.gmx_engine.check_logs_for_error(program)
 
+	# strip hydrogen atoms from the pdb
+	inf  = open(pdb_w_hydrogens,"r")
+	outf = open("%s.trj.pdb"%pdbname,"w")
+	for line in inf:
+		if line[:4]=="ATOM" and line[-2:-1]=="H": continue
+		outf.write(line)
+	inf.close()
+	outf.close()
+	#cleanup
+	subprocess.call(["bash", "-c", "rm -f %s "% pdb_w_hydrogens])
 
 #########################################
 def count_hbonds(params):
