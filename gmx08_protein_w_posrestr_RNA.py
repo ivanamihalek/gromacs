@@ -2,15 +2,14 @@
 
 import os, subprocess
 
-
 from argparse import Namespace
-from gmx_lib import run_setup, gro_and_top
+from gmx_lib import run_setup, gro_and_top, box, water
+from gmx_lib import counterions, local_energy_minimum
+from gmx_lib import solvent_equilibration, production
+from gmx_lib import postproduction
 from gmx_lib.run_setup  import WorkdirStructure
 from gmx_lib.gmx_engine import GmxEngine
 from gmx_lib.gmx_params import GmxParameters
-
-
-from gmx01_core import core
 
 
 #########################################
@@ -27,6 +26,18 @@ def fill_input_dir(params):
 	if os.path.exists("../%s.pdb"%pdbname): os.rename("../%s.pdb"%pdbname,"./%s.pdb"%pdbname)
 	subprocess.call(["bash", "-c", "cp -f %s/* %s"%(params.run_options.mdp_template_home, in_dir)])
 
+#########################################
+def rna_restraints(params):
+	# change to  directory for this stage
+	currdir = params.rundirs.production_dir
+	os.chdir("/".join([params.run_options.workdir, currdir]))
+	proc = subprocess.Popen(["bash", "-c", "grep include ../%s/*top | grep -v %s | grep RNA "%(params.rundirs.top_dir,params.physical.forcefield)],
+					stdout=subprocess.PIPE, stderr=None)
+
+	for line in proc.stdout.readlines():
+		itp = line.rstrip().replace("#","").replace('"','').replace("include","").replace(" ","")
+		subprocess.call(["bash", "-c", "ln -sf ../%s/%s %s"%(params.rundirs.top_dir,itp,itp)],
+					stdout=None, stderr=None)
 
 # simple setup: single peptide, single run
 # create dir structure
@@ -63,10 +74,60 @@ def main():
 								annealing_temp= "300  350  400  450  470  450   400   350   300 ")
 
 
-	######################
-	# the MD simulation sequence
-	######################
-	core(params)
+	###############
+	# process pdb into gro and topology files
+	###############
+	gro_and_top.generate(params)
+
+	###############
+	# place the system in a box (define box boundaries, move to center)
+	###############
+	box.generate(params)
+
+	###############
+	# solvate
+	###############
+	water.add(params)
+
+	###############
+	# add counterions if needed
+	###############
+	counterions.add(params)
+
+	###############
+	# geometry "minimization"  - round 1; method: steepest decent
+	###############
+	local_energy_minimum.find(params, 'em1')
+
+	###############
+	# geometry "minimization"  - round 2; method: LBFGS
+	###############
+	local_energy_minimum.find(params, 'em2')
+
+	###############
+	# position restrained md    -  NVT
+	###############
+	solvent_equilibration.run(params, 'pr1')
+
+	###############
+	# position restrained md    -  NPT
+	###############
+	solvent_equilibration.run(params, 'pr2')
+
+	###############
+	# ... and finally ... the production run!
+	###############
+	rna_restraints(params) # link to restrains from production dir
+	params.physical.request_restraints(params,"md.mdp")
+	production.run(params, position_restrained_run=True)
+
+	###############
+	#  compress the trajectory, strip hydrogens (and gzip)
+	###############
+	postproduction.produce_viewable_trajectory(params)
+
+
+
 
 	######################
 	# cleanup and exit

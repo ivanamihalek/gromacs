@@ -48,7 +48,7 @@ def dir_and_files(params, stage):
 
 
 #########################################
-def generate(params, stage):
+def generate(params, stage, position_restrained_run=False):
 
 
 	[currdir, topfile, grofile_in, paramsfile, tprfile_out] = dir_and_files(params, stage)
@@ -65,6 +65,12 @@ def generate(params, stage):
 
 	program = "grompp"
 	cmdline_args  = "-c %s -p %s " % (grofile_in, topfile)
+	# Note:
+	# "From GROMACS-2018, you need to specify (option -r) the position restraint coordinate files
+	# explicitly to avoid mistakes, although you can still use the same file as you
+	# specify for the -c option."
+	# ergo repeat the same argument twice with two different flags (whoever came up with this 'solution')
+	if position_restrained_run: cmdline_args += "-r %s " % (grofile_in)
 	cmdline_args += "-f %s -o %s " % (paramsfile, tprfile_out)
 	# I don't want to get killed on a single warning (that I have charge, most likely here)
 	cmdline_args += "-maxwarn 3 "

@@ -146,9 +146,9 @@ class GmxParameters:
 								annealing_temp= "300   320   340    360   340   320"):
 
 		os.chdir("/".join([run_params.run_options.workdir, run_params.rundirs.in_dir]))
-		filename = "md.mdp"
+		mdp_file = "md.mdp"
 		outf = open ("tmp.mdp","w")
-		inf =  open (filename,"r")
+		inf =  open (mdp_file,"r")
 		for line in inf:
 			if 'anneal' in line: continue
 			outf.write(line)
@@ -159,5 +159,19 @@ class GmxParameters:
 		outf.write("annealing_time = %s\n" % annealing_time)
 		outf.write("annealing_temp = %s\n" % annealing_temp)
 		outf.close()
-		os.rename("tmp.mdp", filename)
+		os.rename("tmp.mdp", mdp_file)
+		return
+
+	def request_restraints(self, run_params, mdp_file):
+		os.chdir("/".join([run_params.run_options.workdir, run_params.rundirs.in_dir]))
+		mdp_file = "md.mdp"
+		outf = open ("tmp.mdp","w")
+		outf.write("define = -DPOSRES\n")
+		inf =  open (mdp_file,"r")
+		for line in inf:
+			if "POSRES" in line: continue
+			outf.write(line)
+		inf.close()
+		outf.close()
+		os.rename("tmp.mdp", mdp_file)
 		return

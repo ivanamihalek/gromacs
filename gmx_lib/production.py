@@ -11,12 +11,12 @@ from gmx_params import GmxParameters
 import grompp
 
 #########################################
-def run(params):
+def run(params, position_restrained_run=False):
 
 	stage = 'production'
 
 	#grompp = generate parametrized topology file (tpr; binary; complete input compiled)
-	grompp.generate(params, stage) # use the previous step to construct the tpr file
+	grompp.generate(params, stage, position_restrained_run) # use the previous step to construct the tpr file
 
 	# change to  directory for this stage
 	currdir = params.rundirs.name[stage]
@@ -39,7 +39,7 @@ def run(params):
 	program = "mdrun" # nt 1; run multiple trajectories instead
 	# mdrun will produce trajectory and edr (energy) files,  whether we ask for it or not,
 	# so we might just as well name them so we can remove them later
-	cmdline_args  = " -s %s -c %s  -nt 4 -o %s -e %s -g %s" % \
+	cmdline_args  = " -s %s -c %s  -nt 12 -o %s -e %s -g %s" % \
 					(tprfile_in, grofile_out, traj_out, edrfile_out, native_log)
 
 	params.command_log.write("in %s:\n" % (currdir))
